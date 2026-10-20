@@ -1,0 +1,101 @@
+/* ==========================================================================
+   DESIGN TOKENS & SYSTEM VARIABLES - ALEJANDRO LE MARE UX PORTFOLIO
+   ========================================================================== */
+
+:root {
+  /* Brand Core Colors */
+  --color-primary: #6366F1;
+  --color-primary-rgb: 99, 102, 241;
+  --color-primary-light: #818CF8;
+  --color-primary-dark: #4F46E5;
+  
+  --color-accent-purple: #8B5CF6;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-pink: #EC4899;
+  --color-accent-emerald: #10B981;
+  --color-accent-amber: #F59E0B;
+  
+  /* AI Tool Specific Colors */
+  --color-claude: #D97706;
+  --color-claude-bg: rgba(217, 119, 6, 0.12);
+  --color-gemini: #38BDF8;
+  --color-gemini-bg: rgba(56, 189, 248, 0.12);
+
+  /* Dark Theme (Default) */
+  --bg-app: #080C14;
+  --bg-app-pattern: radial-gradient(circle at 50% 0%, #151d33 0%, #080C14 70%);
+  --bg-surface: rgba(15, 23, 42, 0.72);
+  --bg-surface-elevated: rgba(30, 41, 59, 0.78);
+  --bg-surface-hover: rgba(30, 41, 59, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-active: rgba(255, 255, 255, 0.07);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-glow: rgba(99, 102, 241, 0.35);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0F172A;
+
+  --badge-bg: rgba(99, 102, 241, 0.12);
+  --badge-border: rgba(99, 102, 241, 0.28);
+  --badge-text: #A5B4FC;
+
+  /* Shadows & Glows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 35px -5px rgba(99, 102, 241, 0.3);
+  --shadow-glow-cyan: 0 0 35px -5px rgba(6, 182, 212, 0.25);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, Consolas, monospace;
+
+  /* Sizing & Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Max Widths */
+  --container-max: 1240px;
+  --header-height: 80px;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-app: #F8FAFC;
+  --bg-app-pattern: radial-gradient(circle at 50% 0%, #E2E8F0 0%, #F8FAFC 70%);
+  --bg-surface: rgba(255, 255, 255, 0.88);
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-hover: #F1F5F9;
+  --bg-glass: rgba(0, 0, 0, 0.02);
+  --bg-glass-active: rgba(0, 0, 0, 0.05);
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.15);
+  --border-glow: rgba(99, 102, 241, 0.25);
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+
+  --badge-bg: rgba(99, 102, 241, 0.08);
+  --badge-border: rgba(99, 102, 241, 0.2);
+  --badge-text: #4F46E5;
+
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 40px -8px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 30px -5px rgba(99, 102, 241, 0.15);
+}
