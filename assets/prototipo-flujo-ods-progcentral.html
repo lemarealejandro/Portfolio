@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProgCentral – Order flow (prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0A68F0;--blue-d:#0856C6;--blue-dis:#7FA3E6;--green:#2FB387;--gray-bg:#F4F5F7;--nav:#F3F4F6;--ink:#1B1B1D;--ink2:#384250;--mut:#6B7280;--line:#D5D9E0;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Lato,Arial,sans-serif;font-size:13px;color:var(--ink2);background:var(--gray-bg);min-width:1100px}
+h1,h2,h3,.m,button,.btn{font-family:Montserrat,Arial,sans-serif}
+button{cursor:pointer;border:0;background:none;font-size:13px}
+svg{display:block;fill:currentColor}
+#app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+/* NAV */
+nav{background:var(--nav);border-right:1px solid #E5E7EB;display:flex;flex-direction:column;padding:20px 12px 24px;position:sticky;top:0;height:100vh}
+nav .logo{padding:0 0 22px 18px;height:56px}
+nav .logo svg{height:30px;width:auto;fill:none}
+.ni{display:flex;align-items:center;gap:14px;height:36px;padding:0 12px;border-radius:6px;font:600 11.5px Montserrat,Arial,sans-serif;color:#374151;margin-bottom:6px;width:100%;text-align:left}
+.ni svg{width:20px;height:20px;color:#4B5563}
+.ni.on{background:#DCE8FB;color:#0A4FBF}.ni.on svg{color:#0A68F0}
+nav .sp{flex:1}
+.nb{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;font:600 11px Montserrat,Arial,sans-serif;color:#374151;text-align:left;width:100%;line-height:1.25}
+.nb svg{width:20px;height:20px;color:#4B5563}
+/* MAIN */
+main{padding:24px 28px 90px 32px;max-width:1280px}
+.back{display:flex;align-items:center;gap:8px;font:600 12px Montserrat,Arial,sans-serif;color:var(--ink2);margin-bottom:24px;height:24px}
+.back svg{width:20px;height:20px}
+.cols{display:grid;grid-template-columns:400px 1fr;gap:32px;align-items:start}
+.card{background:var(--card);border-radius:4px;box-shadow:0 1px 3px rgba(16,24,40,.14);padding:20px 22px}
+.stack{display:flex;flex-direction:column;gap:20px}
+.sub{display:flex;flex-direction:column;gap:12px}
+h3{font-size:13.5px;font-weight:600;color:#2B3340;letter-spacing:.1px}
+/* customer card */
+.steps{display:flex;align-items:flex-start;justify-content:space-between;margin:6px 4px 20px;position:relative}
+.steps:before{content:"";position:absolute;left:34px;right:34px;top:17px;border-top:1px solid #C9CED6}
+.st{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;color:#4B5563;position:relative;z-index:1}
+.st i{width:34px;height:34px;border-radius:50%;background:#E3E6EA;color:#4B5563;display:grid;place-items:center}
+.st i svg{width:18px;height:18px}
+.st.on i{background:var(--blue);color:#fff}.st.done i{background:var(--green);color:#fff}
+.nm{font:600 14px Montserrat,Arial,sans-serif;color:#1F2937}
+.chip{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-top:4px;font-weight:700;letter-spacing:.2px}
+.c-draft{background:#EFEEDA;color:#6D6B3A}.c-await{background:#E6E6F8;color:#4B4B8F}.c-fund{background:#F8E1E3;color:#A23A45}.c-fclosed{background:#ECECF2;color:#4B5563}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-top:14px}
+.lb{font:600 12px Montserrat,Arial,sans-serif;color:#2B3340;margin-bottom:3px}
+.v{color:#4B5563;line-height:1.5}
+.disc{background:#F1F2F4;border-radius:6px;padding:14px;font-size:11px;line-height:1.55;color:#5B6472;margin-top:18px}
+.disc p+p{margin-top:12px}.disc b{color:#2B3340}
+.sel{width:100%;height:40px;border:1px solid #8D949E;border-radius:4px;padding:0 34px 0 12px;font:13px Lato,Arial,sans-serif;color:#4B5563;background:#fff;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z' fill='%23444'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+.sel:disabled{opacity:.55;background-color:#F6F7F9}
+.link{display:flex;align-items:center;gap:12px;width:100%;padding:0 18px;height:40px;background:#fff;font:600 12px Montserrat,Arial,sans-serif;color:#374151;text-align:left}
+.link svg:first-child{width:18px;height:18px;color:#4B5563}.link svg:last-child{width:20px;height:20px;margin-left:auto;color:#4B5563}
+.links{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(16,24,40,.14);margin-top:14px;padding:4px 0}
+/* fields */
+.inp{width:100%;height:40px;border:1px solid #BFC5CE;border-radius:4px;padding:0 12px;font:13px Lato,Arial,sans-serif;background:#F7F8FA;color:#1F2937}
+.inp:focus,.sel:focus{outline:2px solid #9CC0FF;outline-offset:0}
+.inp.w{background:#fff}
+.fl{position:relative}
+.fl .t{position:absolute;left:12px;top:5px;font-size:9.5px;color:#6B7280;pointer-events:none}
+.fl .inp,.fl .sel{padding-top:14px;height:42px}
+.money{position:relative}.money span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#6B7280;font-size:14px}.money .inp{padding-left:30px}
+.money.fl .t{left:30px}
+.row{display:flex;gap:12px;align-items:center}
+/* progress */
+.bar{height:6px;border-radius:3px;background:#CDEDE5;overflow:hidden;margin:6px 0 4px}.bar i{display:block;height:100%;background:#2DBB8A;transition:width .4s}
+.pl{display:flex;justify-content:space-between;font-size:11px;color:#4B5563}.pv{display:flex;justify-content:space-between;font:600 13px Montserrat,Arial,sans-serif;color:#1F2937}
+/* items */
+.hd{display:flex;align-items:center;gap:8px}.hd .cnt{margin-left:auto;font:600 11px Montserrat,Arial,sans-serif;color:#2B3340}
+.bd{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:9px;letter-spacing:.3px}
+.b-draft{background:#EFEEDA;color:#6D6B3A}.b-sub{background:#E6E6F8;color:#4B4B8F}.b-conf{background:#E3EFEC;color:#4B5563}.b-closed{background:#F6E0E1;color:#5F5559}
+.b-pend{background:#F2F0DD;color:#6D6B3A;margin-left:6px}.b-ok{background:#E3F1EE;color:#4B5563}
+.empty{border:1.5px dashed #AEB4BE;border-radius:8px;padding:28px 40px 26px;text-align:center;margin-top:14px}
+.empty h2{font:700 17px Montserrat,Arial,sans-serif;color:#4B5563;margin-bottom:14px;letter-spacing:.2px}.empty .ic{color:var(--blue);width:44px;height:44px;margin:0 auto 10px}
+.empty p{font-size:11.5px;line-height:1.5;color:#4B5563;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 22px;border-radius:20px;font:600 12.5px Montserrat,Arial,sans-serif;background:var(--blue);color:#fff}
+.btn:hover:not(:disabled){background:var(--blue-d)}.btn:disabled{background:var(--blue-dis);cursor:not-allowed}
+.btn svg{width:18px;height:18px}
+.btn.g{background:#F1F2F4;color:#374151;box-shadow:inset 0 0 0 1px #E1E4E8}.btn.g:hover{background:#E6E8EC}
+.btn.red{background:#D90000}.btn.red:hover{background:#B80000}
+.send{width:100%;height:40px;margin-top:20px;border-radius:20px}
+.send.ok{width:auto;float:right;padding:0 34px}
+.icard{border:1px solid #E1E4E8;border-radius:6px;padding:14px 16px;margin-top:12px;position:relative}
+.icard .top{display:flex;align-items:center}.icard .ti{font:600 13px Montserrat,Arial,sans-serif;color:#1F2937}.icard .pr{margin-left:auto;font:700 13px Montserrat,Arial,sans-serif;color:#1F2937}
+.icard .ds{font-size:11px;color:#4B5563;margin:4px 0 10px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.tg{font-size:11px;padding:4px 10px;border-radius:4px;background:#fff;border:1px solid #D5D9E0;color:#1F2937;font-weight:700}
+.tg.b{background:#E3EDFF;border-color:#E3EDFF;color:#1F5FD6;display:flex;align-items:center;gap:6px}
+.tg.b svg{width:14px;height:14px}.tg.b button{color:#1F5FD6;display:grid;place-items:center}.tg.b button svg{width:13px;height:13px}
+.tg.l{background:#CBEBE3;border-color:#CBEBE3;color:#1F7A66}
+.addc{display:inline-flex;align-items:center;gap:5px;margin-top:10px;color:var(--blue);font:700 11px Lato,Arial,sans-serif}.addc svg{width:14px;height:14px}
+.more{position:absolute;right:12px;top:12px;width:24px;height:24px;color:#374151}.more svg{width:20px;height:20px}
+.menu{position:absolute;right:12px;top:36px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.18);border-radius:6px;padding:6px 0;z-index:5;min-width:170px}
+.menu button{display:block;width:100%;text-align:left;padding:9px 16px;font:600 11.5px Montserrat,Arial,sans-serif;color:#374151}.menu button:hover{background:#F1F4F9}
+.btn.add{background:#F1F2F4;color:#374151;box-shadow:inset 0 0 0 1px #E1E4E8;margin-top:14px}
+/* inline add form */
+.form{background:#E3EDFF;border:1px solid #6C9BF2;border-radius:6px;padding:14px;margin-top:12px}
+.form .r{display:flex;gap:12px;margin-bottom:10px;align-items:center}
+.qty{display:flex;border:1px solid #BFC5CE;border-radius:4px;background:#fff;height:40px;align-items:center;min-width:112px}
+.qty button{width:34px;height:100%;font-size:18px;color:#4B5563}.qty b{flex:1;text-align:center;border-left:1px solid #D5D9E0;border-right:1px solid #D5D9E0;line-height:40px;font:600 13px Montserrat,Arial,sans-serif}
+.rd{display:flex;align-items:center;gap:6px;font-size:12px;color:#1F2937;margin-right:6px}.rd input{accent-color:var(--blue)}
+.err{color:#C41E1E;font-size:11px;margin:-2px 0 8px}
+/* info boxes */
+.note{display:flex;gap:10px;background:#EEEEFC;border-radius:6px;padding:12px 14px;font-size:11px;line-height:1.5;color:#374151;margin-top:12px}
+.note svg{width:16px;height:16px;color:#4B5563;flex:none;margin-top:1px}
+.note.w{background:#fff;border:1px solid #E1E4E8;margin-top:0}
+/* summary */
+.sm{margin-top:14px}.sm .l{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;font-size:12px;color:#374151}
+.sm .l.in{padding-left:20px}.sm .l.hl{background:#F3F4F6}.sm .l.bl{background:#E4EEFC}
+.sm .l .ic{display:flex;align-items:center;gap:10px}.sm .l .ic svg{width:18px;height:18px;color:#4B5563}
+.sm small{font-size:9.5px;color:#6B7280}.sm b{font-weight:700;color:#1F2937}
+.box{border:1px solid #E1E4E8;border-radius:6px;padding:14px 12px;margin-top:14px}
+.box h3{margin:2px 0 8px 4px}.box hr{border:0;border-top:1px solid #E1E4E8;margin:12px 0}
+.pm{display:flex;justify-content:space-between;font-size:9.5px;font-style:italic;color:#6B7280;padding:2px 10px}
+/* tabs */
+.tabs{display:flex;border-bottom:1px solid #D5D9E0;margin:-4px 0 18px}
+.tabs button{flex:1;padding:12px;font:600 12.5px Montserrat,Arial,sans-serif;color:#4B5563;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:#1F2937;border-color:var(--blue)}
+.chk{width:18px;height:18px;border-radius:3px;border:2px solid #6B7280;display:grid;place-items:center;color:#fff;flex:none;background:#fff}
+.chk.on{background:var(--blue);border-color:var(--blue)}.chk svg{width:14px;height:14px}
+.chk.ind:after{content:"";width:8px;height:2px;background:#fff}.chk.ind{background:var(--blue);border-color:var(--blue)}
+.sa{display:flex;align-items:center;gap:8px;margin-left:auto;font:600 11px Montserrat,Arial,sans-serif;color:#2B3340;cursor:pointer}
+/* delivery group */
+.dg{border:1px solid #E1E4E8;border-radius:6px;margin-top:12px}
+.dgh{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:10px;color:#4B5563;cursor:pointer;flex-wrap:wrap}
+.dgh b.m{font:600 10.5px Montserrat,Arial,sans-serif;color:#1F2937}.dgh .ship{background:#E3EDFF;color:#1F5FD6;font-weight:700;padding:1px 6px;border-radius:4px;font-size:9px}
+.dgh .mm{margin-left:auto;width:22px;height:22px}.dgh .mm svg{width:18px;height:18px}
+.dg .icard{margin:0;border:0;border-top:1px solid #EEF0F3;border-radius:0}
+.banner{display:flex;gap:12px;background:#DFF1EC;border-radius:4px;padding:14px 16px;margin-bottom:20px;align-items:flex-start}
+.banner .o{width:20px;height:20px;border-radius:50%;border:2px solid #2FB387;flex:none;margin-top:2px;display:grid;place-items:center}.banner .o:after{content:"";width:8px;height:8px;border-radius:50%;background:#2FB387}
+.banner b{font:700 12px Montserrat,Arial,sans-serif;color:#1F3B35}.banner p{font-size:11px;color:#2E4B44;margin-top:4px}
+.dtw .ph{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#7B8190;font:13px Lato,Arial,sans-serif;pointer-events:none}.dtw.emp input{color:transparent}.dtw.emp input::-webkit-datetime-edit{color:transparent}.dtw input{cursor:pointer}
+.notif{position:fixed;right:32px;bottom:32px;width:396px;max-width:calc(100vw - 40px);background:#fff;border-radius:4px;border-top:6px solid #3F6B5C;box-shadow:0 8px 24px rgba(16,24,40,.22);padding:16px 18px 18px 18px;z-index:95;display:grid;grid-template-columns:24px 1fr 24px;column-gap:14px;align-items:start;animation:s .25s}
+.notif .ni2{color:#2F5A4C;margin-top:1px}.notif .ni2 svg{width:22px;height:22px}
+.notif b{font:700 15px Montserrat,Arial,sans-serif;color:#2B3340;display:block}
+.notif p{font-size:12px;color:#374151;margin-top:6px;line-height:1.4}
+.notif button{color:#374151;display:grid;place-items:center;width:24px;height:24px}.notif button svg{width:20px;height:20px}
+body{padding-top:36px}
+nav{top:36px;height:calc(100vh - 36px)}
+#ptb{position:fixed;top:0;left:0;right:0;height:36px;background:#FFF1C9;color:#5A4600;z-index:40;display:flex;align-items:center;justify-content:center;gap:10px;font:600 12px Montserrat,Arial,sans-serif;border-bottom:1px solid #F0D98A}
+#ptb svg{width:16px;height:16px}
+#ptb b{font-weight:700;letter-spacing:.3px}
+/* overlay / drawer / modal */
+.ov{position:fixed;inset:0;background:rgba(40,44,52,.55);z-index:50;animation:f .15s}
+@keyframes f{from{opacity:0}to{opacity:1}}@keyframes s{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.dr{position:fixed;right:0;top:0;bottom:0;width:min(440px,100vw);background:#fff;z-index:60;padding:24px 20px;display:flex;flex-direction:column;animation:s .2s;overflow-y:auto}
+.dr h2{font:600 17px Montserrat,Arial,sans-serif;color:#1F2937;display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.dr h2 button svg{width:22px;height:22px;color:#374151}
+.dr .it{display:flex;align-items:center;gap:12px;background:#F3F4F6;border-radius:4px;padding:6px 10px;margin-bottom:6px;font-size:11px}
+.thumb{width:36px;height:28px;border-radius:2px;background:linear-gradient(135deg,#f6921e,#d9344b 55%,#2b3a7a);flex:none}
+.dr .it .n{margin-left:auto;text-align:right;color:#374151;line-height:1.5}.dr .it .n b{display:block;font-weight:400}
+.dr .it button{color:#374151}.dr .it button svg{width:18px;height:18px}
+.dr .foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:24px}
+.dr .foot .btn{width:100%;height:40px}
+.rc{display:flex;gap:12px;align-items:flex-start;border-radius:6px;padding:14px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(16,24,40,.18);cursor:pointer;background:#fff}
+.rc input{accent-color:var(--blue);margin-top:3px;width:16px;height:16px}.rc b{font:700 12px Montserrat,Arial,sans-serif;color:#1F2937;display:block}.rc span{font-size:12px;color:#4B5563}
+.rc.on{box-shadow:0 2px 8px rgba(16,24,40,.25)}
+.dr .gap{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.hint{font-size:10.5px;color:#6B7280;margin-top:-8px}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:60;background:#fff;border-radius:8px;width:min(390px,92vw);padding:28px 24px 24px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.modal .x{position:absolute;right:14px;top:14px;color:#374151}.modal .x svg{width:18px;height:18px}
+.modal .al{width:44px;height:44px;border-radius:50%;background:#FBD0D0;margin:0 auto 12px;display:grid;place-items:center}.modal .al div{width:28px;height:28px;border-radius:50%;background:#F58C8C;display:grid;place-items:center;color:#D90000}.modal .al svg{width:16px;height:16px}
+.modal h2{font:600 13px Montserrat,Arial,sans-serif;color:#1F2937;margin-bottom:10px}.modal p{font-size:12px;line-height:1.5;color:#374151;margin-bottom:18px}
+.modal .btn{width:100%;height:38px;margin-top:10px}
+.modal textarea{width:100%;height:110px;border:1px solid #BFC5CE;border-radius:4px;padding:10px;font:13px Lato,Arial,sans-serif;margin-bottom:6px;resize:none}
+.modal .ls{text-align:left;font-size:12px;margin-bottom:12px}.modal .ls div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #EEF0F3}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1F3B35;color:#fff;border-radius:6px;padding:14px 22px;z-index:90;font:600 12px Montserrat,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.28);display:flex;gap:10px;align-items:center;animation:f .2s}
+.toast svg{width:18px;height:18px;color:#6FE0B6}
+/* prototype bar (not part of the design) */
+#pb{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(27,27,29,.92);color:#fff;border-radius:26px;padding:8px 10px 8px 16px;display:flex;gap:10px;align-items:center;z-index:70;font:600 11px Montserrat,Arial,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+#pb select{background:#33343A;color:#fff;border:0;border-radius:14px;padding:6px 10px;font:600 11px Montserrat,Arial,sans-serif}
+#pb button{background:#fff;color:#00206A;border-radius:14px;padding:7px 14px;font:700 11px Montserrat,Arial,sans-serif}#pb button.s{background:transparent;color:#cfd3dc;box-shadow:inset 0 0 0 1px #5a5c66}
+#pb em{font-style:normal;color:#9aa0ad}
+</style>
+</head>
+<body>
+<div id="ptb"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg><span><b>PROTOTYPE</b> · This is an interactive prototype. All data and lease calculations are illustrative.</span></div>
+<div id="app"></div>
+<div id="pb"></div>
+<div id="ovl"></div>
+<script>
+const LOGO=`<svg  viewBox="0 0 72 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M54.8353 48.9834C54.8353 49.3605 54.4653 50.0113 54.143 50.2023L38.8454 59.2475V41.4915C38.8454 40.0427 38.0717 38.6854 36.8245 37.949L20.6904 28.4242L36.1521 19.3004C36.4624 19.1163 37.1726 19.1173 37.4829 19.3014L54.141 29.1815C54.4653 29.3735 54.8353 30.0223 54.8353 30.4004V48.9834ZM35.6806 84.1173C35.6806 84.4775 35.4559 84.6586 35.3206 84.7342C35.1863 84.8108 34.9158 84.9113 34.6075 84.7262L19.5078 75.6592C19.296 75.5318 19.1637 75.299 19.1637 75.0512V31.1995L35.2162 40.6755C35.5036 40.8457 35.6816 41.1571 35.6816 41.4915L35.6806 84.1173ZM55.7542 26.4569L39.0971 16.5779C37.8001 15.8097 35.8428 15.8067 34.5449 16.5729L18.2736 26.1743C16.8712 27.0032 16 28.5297 16 30.1596V75.0512C16 76.4045 16.7201 77.6772 17.8798 78.3737L32.9784 87.4408C33.599 87.8129 34.2843 88 34.9706 88C35.625 88 36.2794 87.8298 36.8802 87.4895C38.1104 86.793 38.8454 85.5322 38.8454 84.1172V62.9252L55.7542 52.9268C57.0343 52.1675 58 50.4729 58 48.9833V30.4004C58 28.9108 57.0343 27.2162 55.7542 26.4569Z" fill="#0093C9"/>
+<path d="M40.975 87.175V85.7912H41.6763C41.7325 85.7912 41.7937 85.8075 41.86 85.84C41.9263 85.8712 41.9825 85.92 42.0287 85.9863C42.0763 86.0512 42.1 86.1337 42.1 86.2338C42.1 86.335 42.0756 86.4212 42.0269 86.4925C41.9781 86.5625 41.9187 86.6156 41.8487 86.6519C41.78 86.6881 41.715 86.7063 41.6538 86.7063H41.1475V86.4813H41.56C41.6012 86.4813 41.6456 86.4606 41.6931 86.4194C41.7419 86.3781 41.7662 86.3163 41.7662 86.2338C41.7662 86.1487 41.7419 86.0912 41.6931 86.0612C41.6456 86.0313 41.6037 86.0163 41.5675 86.0163H41.2788V87.175H40.975ZM41.8112 86.5225L42.1562 87.175H41.8225L41.485 86.5225H41.8112ZM41.5 88C41.2925 88 41.0981 87.9612 40.9169 87.8838C40.7356 87.8063 40.5763 87.6987 40.4388 87.5612C40.3013 87.4237 40.1938 87.2644 40.1163 87.0831C40.0388 86.9019 40 86.7075 40 86.5C40 86.2925 40.0388 86.0981 40.1163 85.9169C40.1938 85.7356 40.3013 85.5763 40.4388 85.4388C40.5763 85.3013 40.7356 85.1938 40.9169 85.1163C41.0981 85.0387 41.2925 85 41.5 85C41.7075 85 41.9019 85.0387 42.0831 85.1163C42.2644 85.1938 42.4237 85.3013 42.5612 85.4388C42.6987 85.5763 42.8063 85.7356 42.8837 85.9169C42.9612 86.0981 43 86.2925 43 86.5C43 86.7075 42.9612 86.9019 42.8837 87.0831C42.8063 87.2644 42.6987 87.4237 42.5612 87.5612C42.4237 87.6987 42.2644 87.8063 42.0831 87.8838C41.9019 87.9612 41.7075 88 41.5 88ZM41.5 87.64C41.71 87.64 41.9013 87.5887 42.0737 87.4863C42.2462 87.3837 42.3837 87.2462 42.4862 87.0738C42.5887 86.9012 42.64 86.71 42.64 86.5C42.64 86.29 42.5887 86.0988 42.4862 85.9262C42.3837 85.7538 42.2462 85.6163 42.0737 85.5137C41.9013 85.4113 41.71 85.36 41.5 85.36C41.29 85.36 41.0988 85.4113 40.9262 85.5137C40.7537 85.6163 40.6162 85.7538 40.5138 85.9262C40.4113 86.0988 40.36 86.29 40.36 86.5C40.36 86.71 40.4113 86.9012 40.5138 87.0738C40.6162 87.2462 40.7537 87.3837 40.9262 87.4863C41.0988 87.5887 41.29 87.64 41.5 87.64Z" fill="#0093C9"/>
+</svg>`;
+const APPROVAL=1500;
+const I={
+home:'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+people:'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z',
+team:'M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z',
+chart:'M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z',
+phone:'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z',
+set:'M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z',
+calc:'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8 18H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V8h2v2zm5 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm5 8h-2v-6h2v6zm0-8h-2V8h2v2z',
+app:'M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z',
+school:'M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z',
+help:'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z',
+out:'M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z',
+back:'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z',
+cartO:'M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0020.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z',
+cart:'M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z',
+edit:'M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z',
+truck:'M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
+dollar:'M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z',
+note:'M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z',
+chev:'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z',
+plus:'M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z',
+x:'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z',
+info:'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z',
+bank:'M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z',
+card:'M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z',
+renew:'M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z',
+clip:'M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z',
+cal:'M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z',
+trash:'M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z',
+more:'M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+warn:'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z',
+print:'M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z',
+ret:'M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z',
+chk:'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z',
+cancel:'M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z'
+};
+const ic=(k,s)=>`<svg viewBox="0 0 24 24"${s?` style="width:${s}px;height:${s}px"`:''}><path d="${I[k]}"/></svg>`;
+const $=n=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CH=['Delivery','Warranty'];
+const blank=()=>({stage:'draft',invoice:'',items:[],deposit:{m:'',a:''},seller:'',notes:'',tab:'delivery',adding:false,
+ form:{brand:'',cost:'',qty:1,cond:'New',desc:'',pid:'',gt:'GTIN-8',gn:''},
+ drawer:null,modal:null,menu:null,toast:null,
+ cform:{t:'',c:''},dform:{type:'Ship',date:'',carrier:'',track:'',ids:[]},sel:[],deliveries:[],closed:{},uid:1});
+let S=blank();
+
+/* ---------- derived ---------- */
+const itemTotal=i=>Number(i.cost)*Number(i.qty)+i.charges.reduce((a,c)=>a+Number(c.c),0);
+const cash=()=>S.items.reduce((a,i)=>a+itemTotal(i),0);
+const pending=()=>S.items.filter(i=>!i.del);
+const stepIdx=()=>({draft:0,submitted:1,awaiting:2,confirmed:2,funded:2,closed:4}[S.stage]);
+const sendOK=()=>S.items.length>0&&S.invoice.trim()&&S.deposit.m;
+
+/* ---------- pieces ---------- */
+function nav(){
+ const n=[['home','Home'],['people','Customers',1],['team','Team'],['chart','Reports'],['phone','Contact'],['set','Settings']];
+ const b=[['calc','Payment<br>Estimator'],['app','Application'],['school','ProgU - Training'],['help','Get help'],['out','Log out']];
+ return `<nav><div class="logo">${LOGO}</div>${n.map(x=>`<button class="ni ${x[2]?'on':''}" data-a="navtoast">${ic(x[0])}${x[1]}</button>`).join('')}<div class="sp"></div>${b.map(x=>`<button class="nb" data-a="navtoast"><span>${x[1]}</span>${ic(x[0])}</button>`).join('')}</nav>`;
+}
+function steps(){
+ const c=stepIdx();
+ return `<div class="steps">${[['cart','Cart'],['edit','Signature'],['truck',S.stage==='closed'?'Delivery':'Deliver'],['dollar','Funded']].map((s,i)=>`<div class="st ${i<c?'done':i==c?'on':''}"><i>${ic(s[0])}</i>${s[1]}</div>`).join('')}</div>`;
+}
+function left(){
+ const chips={draft:['Draft','c-draft'],submitted:['Invoice in progress','c-draft'],awaiting:['Awaiting delivery','c-await'],confirmed:['Awaiting delivery','c-await'],funded:['Funded','c-await'],closed:['Funded','c-fclosed']}[S.stage];
+ const L=(a,i,t)=>`<button class="link" data-a="${a}">${ic(i)}<span>${t}</span>${ic('chev')}</button>`;
+ const links={draft:L('notes','note','Add notes')+L('viewinv','note','View invoice'),
+  submitted:L('notes','note','Add notes')+L('cancelagr','cancel','Cancel agreement')+L('print','print','Print unsigned agreement'),
+  awaiting:L('notes','note','Add notes')+L('cancelagr','cancel','Cancel agreement'),
+  confirmed:L('notes','note','Add notes')+L('cancelagr','cancel','Cancel agreement'),
+  funded:L('notes','note','Add notes')+L('cancelagr','cancel','Cancel agreement'),
+  closed:L('notes','note','Add notes')+L('return','ret','Process Return')}[S.stage];
+ return `<div><div class="card">${steps()}<div class="nm">Christopher Henderson</div><span class="chip ${chips[1]}">${chips[0]}</span>
+ <div class="g2"><div><div class="lb">Phone Number</div><div class="v">(210) 123-1234</div></div><div><div class="lb">Lease ID</div><div class="v">123456789</div></div></div>
+ <div style="margin-top:14px"><div class="lb">Shipping Address</div><div class="v">123 Street Name<br>San Antonio, TX 78233</div></div>
+ <div style="margin-top:14px"><div class="lb">Email</div><div class="v">christopher.henderson@companyurl.com</div></div>
+ <div class="g2"><div><div class="lb">Applied date</div><div class="v">Mar 15, 2021</div></div><div><div class="lb">Expiration date</div><div class="v">Mar 15, 2021</div></div></div>
+ <div style="margin-top:14px"><div class="lb">Sales Person</div><select class="sel" data-k="seller"><option value="">Select a team member</option>${['Alex Rivera','Maria Gomez','Daniel Smith'].map(s=>`<option ${S.seller==s?'selected':''}>${s}</option>`).join('')}</select></div>
+ <div class="g2"><div><div class="lb">Store</div><div class="v">Best Buy</div></div><div><div class="lb">Channel</div><div class="v">Online</div></div></div>
+ <div class="disc"><p>You agree you will only use the customer information you obtain from Progressive Leasing (e.g., via this ProgCentral Portal) for the limited purpose of assisting customers with their <b>lease-to-own agreement</b>.</p><p>If a customer exercises their right to opt-out of these communications, you agree to notify Progressive Leasing at (855) 222-0801</p></div></div>
+ <div class="links">${links}</div></div>`;
+}
+function invoiceCard(){
+ const d=S.stage==='draft';
+ return `<div class="card"><div class="hd"><h3>Invoice Number</h3>${d?'':`<button class="m" style="margin-left:auto;width:24px;height:24px;color:#374151" data-a="navtoast">${ic('more',20)}</button>`}</div>
+ <div style="margin-top:12px">${d?`<input class="inp" id="inv" data-k="invoice" placeholder="* Invoice number" value="${esc(S.invoice)}">`:`<div style="font-size:13px;color:#1F2937">${esc(S.invoice||'1234')}</div>`}</div></div>`;
+}
+function setupCard(){
+ const t=cash(),has=S.items.length>0;
+ return `<div class="card"><h3>${has?'Set up their lease by adding item(s)':'Set up their lease by adding items'}</h3>
+ <div class="bar"><i style="width:${Math.min(100,t/APPROVAL*100)}%"></i></div>
+ <div class="pl"><span>Cash price</span><span>${has?'Remaining approval':'Approval amount'}</span></div>
+ <div class="pv"><span>${$(t)}</span><span>${$(APPROVAL-t)}</span></div></div>`;
+}
+const chipsHTML=(i,rm)=>i.charges.map((c,k)=>`<span class="tg b">${ic(c.t==='Delivery'?'truck':'clip')}${c.t}: ${$(c.c)}${rm?`<button data-a="askrm" data-i="${i.id}" data-k="${k}">${ic('x')}</button>`:''}</span>`).join('');
+function itemCard(i,o={}){
+ const badge=o.conf?'<span class="bd b-ok">CONFIRMED</span>':'<span class="bd b-pend">PENDING</span>';
+ const edit=S.stage==='draft';
+ return `<div class="icard">${o.chk?'':''}
+ <div class="top">${o.chk?`<span class="chk ${S.sel.includes(i.id)?'on':''}" data-a="selitem" data-i="${i.id}" style="margin-right:10px;cursor:pointer">${S.sel.includes(i.id)?ic('chk'):''}</span>`:''}<span class="ti">${esc(i.brand)}</span>${o.conf?`<span class="bd b-ok" style="margin-left:8px">CONFIRMED</span>`:`<span class="bd b-pend" style="margin-left:8px">PENDING</span>`}<span class="pr" ${edit?'style="margin-right:26px"':''}>${$(Number(i.cost)*Number(i.qty))}</span></div>
+ ${edit?`<button class="more" data-a="menu" data-i="${i.id}">${ic('more')}</button>`:''}
+ ${S.menu===i.id?`<div class="menu"><button data-a="opencharge" data-i="${i.id}">Add additional charge</button><button data-a="rmitem" data-i="${i.id}">Remove item</button></div>`:''}
+ <div class="ds">${esc(i.desc)}${Number(i.qty)>1?` · Qty ${i.qty}`:''}</div>
+ ${i.charges.length?`<div class="tags" style="margin-top:0">${chipsHTML(i,edit)}</div>`:''}
+ <div class="tags"><span class="tg">${esc(i.pid)}</span>${i.gn?`<span class="tg ${o.link?'b':''}">${esc(i.gt)} ${esc(i.gn)}</span>`:''}<span class="tg l">Leasable</span></div>
+ ${edit&&i.charges.length<CH.length?`<button class="addc" data-a="opencharge" data-i="${i.id}">${ic('plus')}Add additional charge</button>`:''}</div>`;
+}
+function formHTML(){
+ const f=S.form;
+ return `<div class="form"><div class="r"><input class="inp w" data-f="brand" placeholder="Brand name" value="${esc(f.brand)}" style="flex:1.4"><div class="money" style="flex:1"><span>$</span><input class="inp w" data-f="cost" type="number" min="0" placeholder="* Item cost" value="${esc(f.cost)}"></div>
+ <div class="qty"><button data-a="qm">−</button><b>${f.qty}</b><button data-a="qp">+</button></div></div>
+ <div class="r"><label class="rd"><input type="radio" name="cond" data-a="cond" data-v="New" ${f.cond=='New'?'checked':''}>New</label><label class="rd"><input type="radio" name="cond" data-a="cond" data-v="Used" ${f.cond=='Used'?'checked':''}>Used</label><input class="inp w" data-f="desc" placeholder="* Item description" value="${esc(f.desc)}"></div>
+ <div class="lb" style="margin:14px 0 8px;font-size:11px">Item identifiers</div>
+ <div class="r"><input class="inp w" data-f="pid" placeholder="Retailer's product ID*" value="${esc(f.pid)}" style="flex:1.2"><select class="sel" data-f="gt" style="flex:1"><option>GTIN-8</option><option>GTIN-12</option><option>GTIN-13</option><option>GTIN-14</option></select><input class="inp w" data-f="gn" placeholder="GTIN Number" value="${esc(f.gn)}" style="flex:1.2"></div>
+ <div class="err" id="ferr" style="display:none"></div>
+ <div class="row" style="margin-top:14px"><button class="btn" id="btnAdd" data-a="saveitem" ${formOK()?'':'disabled'}>${ic('plus')}Add</button><button class="btn g" data-a="cancelform">Cancel</button></div></div>`;
+}
+const formOK=()=>{const f=S.form;return f.brand.trim()&&Number(f.cost)>0&&f.desc.trim()&&f.pid.trim()};
+function itemsCard(){
+ const st=S.stage,n=S.items.length;
+ const bd={draft:['DRAFT','b-draft'],submitted:['SUBMITTED','b-sub']}[st];
+ let h=`<div class="card"><div class="hd"><h3>Lease items</h3>${bd&&n?`<span class="bd ${bd[1]}">${bd[0]}</span>`:''}<span class="cnt">${n} ${n===1?'Items':n?'Items':'items'}</span></div>`;
+ if(!n&&!S.adding) h+=`<div class="empty"><h2>No items in this order yet</h2><div style="width:52px;height:52px;margin:0 auto 14px;color:#2B6BF3">${ic('cartO',52)}</div><p>Add the customer's merchandise to build the lease. Each item runs through a Full Leasability Evaluation before it's included.</p><button class="btn" data-a="addfirst">${ic('plus')}Add first item</button></div>`;
+ else{
+  h+=S.items.map(i=>itemCard(i)).join('');
+  if(S.adding) h+=formHTML();
+  else if(st==='draft') h+=`<button class="btn add" data-a="additem">${ic('plus')}Add item</button>`;
+ }
+ return h+'</div>';
+}
+function depositCard(wrap){
+ const ro=S.stage!=='draft',d=S.deposit;
+ return `<div class="${wrap?'':'card'}"><h3>Deposit</h3><div class="row" style="margin-top:14px"><div class="fl" style="flex:1.3">${d.m?'<span class="t">Select Payment Method</span>':''}<select class="sel" data-dep="m" ${ro?'disabled':''}><option value="">Select Payment Method</option>${['Progressive card on file','Merchant collected'].map(x=>`<option ${d.m==x?'selected':''}>${x}</option>`).join('')}</select></div>
+ <div class="money fl" style="flex:1">${d.a?'<span class="t">Deposit</span>':''}<span>$</span><input class="inp w" data-dep="a" type="number" placeholder="Deposit" value="${esc(d.a)}" ${ro?'disabled':''} style="${ro?'opacity:.55':''}"></div></div>
+ ${d.m==='Progressive card on file'?`<div class="note">${ic('info')}<div>The refundable lease deposit will be charged by Progressive to the customer's card on file when the invoice is sent. <b>No action needed at the counter.</b></div></div>`:''}</div>`;
+}
+const TAX=0.0825,LEASE_RATE=0.65,PERIODS=26;
+const r2=n=>Math.round((n+Number.EPSILON)*100)/100;
+function calc(){
+ const cashP=r2(cash()),lease=r2(cashP*LEASE_RATE),tax=r2((cashP+lease)*TAX),total=r2(cashP+lease+tax);
+ const dep=S.deposit.m?Math.min(Math.max(Number(S.deposit.a)||0,0),total):0;
+ const rem=r2(total-dep),pay=r2(rem/PERIODS),ptax=r2(pay*TAX/(1+TAX)),pre=r2(pay-ptax);
+ return{cashP,lease,tax,total,dep,rem,pay,ptax,pre};
+}
+function summaryCard(wrap){return `<div id="sumc" class="${wrap?'':'card'}">${summaryInner()}</div>`;}
+function summaryInner(){
+ const K=calc();
+ const c=(a,b,cl)=>`<div class="l ${cl||''}"><span>${a}</span><span>${b}</span></div>`;
+ return `<h3>Lease amount summary</h3><div class="sm">
+ <div class="l"><span class="ic">${ic('bank')}Cash price (includes delivery charge)</span><span>${$(K.cashP)}</span></div>
+ ${c('Cost of leasing','+ '+$(K.lease))}${c('Estimated tax <small>ⓘ</small>','+ '+$(K.tax))}${c('12-month lease-to-own total cost',$(K.total),'hl')}${c('Refundable lease deposit <small>(includes tax)</small>',$(K.dep),'in')}${c('Remaining amount after deposit',$(K.rem),'bl')}</div>
+ <div class="note w" style="margin-top:20px">${ic('info')}<div>The deposit is collected by the retailer at lease signing through a separate transaction.</div></div>
+ <div class="box"><h3>Payments due at signing</h3><div class="sm" style="margin-top:6px"><div class="l"><span class="ic">${ic('card')}Initial payment</span><b>${$(K.pre)}</b></div>${c('Tax','+'+$(K.ptax),'in')}<div class="l in hl"><b>Total</b><b>${$(K.pay)}</b></div></div>
+ <div class="pm"><span>Payment method</span><span>Credit/Debit card</span></div><hr>
+ <h3>Estimated scheduled payments (Auto enrollment) <small style="color:#6B7280">ⓘ</small></h3><div class="sm" style="margin-top:6px">${c('Payment amount',$(K.pre),'in')}${c('Estimated tax <small>ⓘ</small>','+'+$(K.ptax),'in')}<div class="l hl"><span class="ic">${ic('renew')}<b>Every two weeks</b>, they'll automatically pay</span><b>${$(K.pay)}</b></div></div></div>
+ <div class="note w" style="margin-top:20px">${ic('info')}<div>Customer has elected to pay a refundable lease deposit. This deposit is optional, and lowers their renewal payments, early buyout cost, and total cost of leased items. They will not be eligible for a refund after they acquire ownership.</div></div>`;
+}
+const carrierName=d=>d.type==='Ship'?`<span class="ship">SHIP</span>`:`<span class="ship">${d.type.toUpperCase()}</span>`;
+function groupHTML(d){
+ const its=S.items.filter(i=>d.ids.includes(i.id)),open=!S.closed[d.id],fd=new Date(d.date+'T12:00:00').toLocaleDateString('en-US');
+ return `<div class="dg"><div class="dgh" data-a="togg" data-d="${d.id}"><span>${open?'•':'•'}</span><b class="m">Delivery info</b>${carrierName(d)}<span>${d.type==='Pickup'?'Pickup':'Delivery'} date: ${fd}</span>${d.type==='Ship'?`<span>${esc(d.carrier)}</span><span>Tracking ID: ${esc(d.track)}</span>`:''}<button class="mm" data-a="navtoast">${ic('more')}</button></div>
+ ${open?its.map(i=>itemCard(i,{conf:S.stage==='confirmed'||S.stage==='funded'||S.stage==='closed',link:1}).replace('class="icard"','class="icard" style="border-radius:0"')).join(''):''}</div>`;
+}
+function awaitingCard(){
+ const tab=S.tab,pend=pending(),dels=S.deliveries;
+ let h=`<div class="card"><div class="tabs"><button class="${tab==='delivery'?'on':''}" data-a="tab" data-t="delivery">Delivery Info</button><button class="${tab==='invoice'?'on':''}" data-a="tab" data-t="invoice">Invoice information</button></div>`;
+ if(tab==='delivery'){
+  const all=pend.length&&pend.every(i=>S.sel.includes(i.id)),some=S.sel.length>0;
+  h+=`<div class="hd"><h3>Lease items</h3><span class="bd b-sub">SUBMITTED</span><span class="cnt" style="margin-left:8px">${pend.length} Items</span>${pend.length?`<span class="sa" data-a="selall">Select all items <span class="chk ${all?'on':some?'ind':''}">${all?ic('chk'):''}</span></span>`:''}</div>`;
+  h+=pend.map(i=>itemCard(i,{chk:1,link:1})).join('');
+  if(pend.length) h+=`<button class="btn" style="margin-top:16px" data-a="opendelivery" ${some?'':'disabled'}>${ic('truck')}Set delivery</button>`;
+  h+=dels.map(groupHTML).join('');
+ } else h+=depositCard(1)+'<div style="height:12px"></div>'+summaryCard(1);
+ return h+'</div>';
+}
+function main(){
+ const st=S.stage;let h='';
+ if(st==='confirmed') h+=`<div class="banner"><div class="o"></div><div><b>Processing complete: Merchandise CAN be released.</b><p>The initial payment has been successfully charged and merchandise is free to be released to the customer.</p></div></div>`;
+ h+='<div class="stack">'+invoiceCard();
+ if(st!=='closed') h+=setupCard();
+ if(st==='awaiting') h+=awaitingCard();
+ else if(st==='confirmed'||st==='funded'||st==='closed'){
+  h+=`<div class="card"><div class="hd"><h3>Lease items</h3><span class="bd ${st==='closed'?'b-closed':'b-conf'}">${st==='closed'?'CLOSED':'CONFIRMED'}</span><span class="cnt" style="margin-left:8px">${S.items.length} Items</span></div>${S.deliveries.map(groupHTML).join('')}</div>`;
+  h+=`<div class="card" style="background:#F9FAFB">${depositCard(1)}<div style="height:14px"></div>${summaryCard(0).replace('class="card"','class="card" style="box-shadow:none"')}</div>`;
+ } else {
+  h+=itemsCard()+depositCard()+summaryCard();
+ }
+ h+='</div>';
+ if(st==='draft'){const ok=sendOK();h+=`<button class="btn send ${ok?'ok':''}" id="btnSend" data-a="send" ${ok?'':'disabled'}>Send agreement</button><div style="clear:both"></div>`;}
+ return h;
+}
+/* ---------- overlays ---------- */
+function overlays(){
+ let h='';
+ if(S.drawer==='charge'){
+  const it=S.items.find(i=>i.id===S.cid),used=it.charges.map(c=>c.t),opts=CH.filter(c=>!used.includes(c));
+  h+=`<div class="ov" data-a="closedrawer"></div><aside class="dr"><h2>Add additional charges<button data-a="closedrawer">${ic('x')}</button></h2>
+  <div class="lb" style="font-size:12px;margin-bottom:10px">Items for adding additional charges</div><div class="it"><div class="thumb"></div><div class="n">${esc(it.brand)}<b>${$(Number(it.cost)*Number(it.qty))}</b></div></div>
+  <hr style="border:0;border-top:1px solid #E1E4E8;margin:14px 0 18px"><div class="gap" style="margin-top:0"><select class="sel" data-cf="t"><option value="">Type of additional charge</option>${opts.map(o=>`<option ${S.cform.t==o?'selected':''}>${o}</option>`).join('')}</select>
+  <div class="money"><span>$</span><input class="inp w" data-cf="c" type="number" min="0" placeholder="Item cost" value="${esc(S.cform.c)}"></div></div>
+  <div class="foot"><button class="btn" id="btnCh" data-a="savecharge" ${S.cform.t&&Number(S.cform.c)>0?'':'disabled'}>Add charge</button><button class="btn g" data-a="closedrawer">Close</button></div></aside>`;
+ }
+ if(S.drawer==='delivery'){
+  const d=S.dform,its=S.items.filter(i=>d.ids.includes(i.id));
+  h+=`<div class="ov" data-a="closedrawer"></div><aside class="dr"><h2>Set delivery<button data-a="closedrawer">${ic('x')}</button></h2>
+  <div class="lb" style="font-size:12px;margin-bottom:10px">Items for delivery</div>${its.map(i=>`<div class="it"><div class="thumb"></div><div class="n">${esc(i.brand)}<b>${$(itemTotal(i)-i.charges.reduce((a,c)=>a+Number(c.c),0))}</b></div><button data-a="delrm" data-i="${i.id}">${ic('trash')}</button></div>`).join('')}
+  <div class="lb" style="font-size:12px;margin:16px 0 10px">Delivery Type</div>
+  ${[['Ship','Carrier with tracking ID'],['Direct','Direct delivery'],['Pickup','Customer pickup']].map(r=>`<label class="rc ${d.type==r[0]?'on':''}"><input type="radio" name="dt" data-a="dtype" data-v="${r[0]}" ${d.type==r[0]?'checked':''}><div><b>${r[0]}</b><span>${r[1]}</span></div></label>`).join('')}
+  <hr style="border:0;border-top:1px solid #E1E4E8;margin:8px 0 4px"><div class="gap"><div class="fl dtw ${d.date?'':'emp'}"><span class="t" style="${d.date?'':'display:none'}">${d.type==='Pickup'?'Pickup date':'Delivery date'}</span>${d.date?'':`<span class="ph">${d.type==='Pickup'?'Pickup date':'Delivery date'}</span>`}<input class="inp w" type="date" data-df="date" value="${d.date}"></div>
+  ${d.type==='Ship'?`<select class="sel" data-df="carrier"><option value="">Select carrier</option>${['Fedex','UPS','USPS','DHL'].map(c=>`<option ${d.carrier==c?'selected':''}>${c}</option>`).join('')}</select><input class="inp w" data-df="track" placeholder="Tracking ID" value="${esc(d.track)}"><div class="hint">e.g., 1Z23456AAA34567</div>`:''}</div>
+  <div class="foot"><button class="btn" id="btnDel" data-a="confirmdel" ${delOK()?'':'disabled'}>Confirm delivery</button><button class="btn g" data-a="closedrawer">Close</button></div></aside>`;
+ }
+ if(S.modal){
+  const m=S.modal;h+=`<div class="ov" data-a="closemodal"></div>`;
+  if(m.t==='rm'){const it=S.items.find(i=>i.id===m.i),c=it.charges[m.k];
+   h+=`<div class="modal"><button class="x" data-a="closemodal">${ic('x')}</button><div class="al"><div>${ic('warn')}</div></div><h2>Remove charge</h2><p>Are you sure you want to remove<br>the <b>${c.t}</b> charge of <b>${$(c.c)}</b>? This action cannot be undone.</p><button class="btn g" data-a="closemodal">Cancel</button><button class="btn red" data-a="dorm">Yes, remove</button></div>`;}
+  if(m.t==='notes') h+=`<div class="modal"><button class="x" data-a="closemodal">${ic('x')}</button><h2>Add notes</h2><textarea id="nt" placeholder="Write a note about this customer…">${esc(S.notes)}</textarea><button class="btn" data-a="savenotes">Save note</button><button class="btn g" data-a="closemodal">Cancel</button></div>`;
+  if(m.t==='inv') h+=`<div class="modal"><button class="x" data-a="closemodal">${ic('x')}</button><h2>Invoice ${esc(S.invoice||'(not set)')}</h2><div class="ls">${S.items.length?S.items.map(i=>`<div><span>${esc(i.brand)}</span><b>${$(itemTotal(i))}</b></div>`).join('')+`<div><b>Total</b><b>${$(cash())}</b></div>`:'<div>No items yet</div>'}</div><button class="btn g" data-a="closemodal">Close</button></div>`;
+  if(m.t==='cancel') h+=`<div class="modal"><button class="x" data-a="closemodal">${ic('x')}</button><div class="al"><div>${ic('warn')}</div></div><h2>Cancel agreement</h2><p>Are you sure you want to cancel this agreement? The order will return to draft.</p><button class="btn g" data-a="closemodal">Keep agreement</button><button class="btn red" data-a="docancel">Yes, cancel</button></div>`;
+ }
+ if(S.notif) h+=`<div class="notif" role="status"><div class="ni2">${ic('info')}</div><div><b>${esc(S.notif.title)}</b><p>${esc(S.notif.body)}</p></div><button data-a="closenotif" aria-label="Close">${ic('x')}</button></div>`;
+ if(S.toast) h+=`<div class="toast">${ic('chk')}${esc(S.toast)}</div>`;
+ return h;
+}
+function proto(){
+ const lab={draft:S.items.length?'Draft':'Empty draft',submitted:'Submitted',awaiting:'Awaiting delivery',confirmed:'Confirmed',funded:'Funded',closed:'Closed'}[S.stage];
+ const act=S.stage==='submitted'?`<button data-a="sign">Simulate customer signature</button>`:S.stage==='confirmed'?`<button data-a="fund">Simulate funding</button>`:S.stage==='funded'?`<button data-a="closelease">Simulate close</button>`:'';
+ return `<span>Prototype · <em>${lab}</em></span><select data-a="jump"><option value="">Go to screen…</option><option value="empty">1 · Empty draft</option><option value="item">2 · Draft with item + charges</option><option value="submitted">3 · Submitted</option><option value="awaiting">4 · Awaiting delivery</option><option value="confirmed">5 · Confirmed</option><option value="funded">6 · Funded</option><option value="closed">7 · Closed</option></select>${act}<button class="s" data-a="reset">Reset</button>`;
+}
+/* ---------- render ---------- */
+function render(keep){
+ const y=window.scrollY;
+ document.getElementById('app').innerHTML=nav()+`<main><button class="back" data-a="navtoast">${ic('back')}Back</button><div class="cols">${left()}<div>${main()}</div></div></main>`;
+ document.getElementById('ovl').innerHTML=overlays();
+ document.getElementById('pb').innerHTML=proto();
+ window.scrollTo(0,keep===false?0:y);
+}
+let tt;function toast(t){S.toast=t;clearTimeout(tt);tt=setTimeout(()=>{S.toast=null;document.getElementById('ovl').innerHTML=overlays()},2600);}
+let nt;function notify(title,body){S.notif={title,body};clearTimeout(nt);nt=setTimeout(()=>{S.notif=null;document.getElementById('ovl').innerHTML=overlays()},7000);}
+const delOK=()=>{const d=S.dform;return d.ids.length&&d.date&&(d.type!=='Ship'||(d.carrier&&d.track.trim()))};
+function seed(stage){
+ S=blank();
+ const A={id:1,brand:'LG Washing machine',desc:'Tv gray color',cost:300,qty:1,cond:'New',pid:'SKU6785',gt:'GTIN-8',gn:'38294560',charges:[{t:'Delivery',c:150},{t:'Warranty',c:150}]};
+ const B={id:2,brand:'LG TV 66"',desc:'Tv 66" Oled',cost:600,qty:1,cond:'New',pid:'SKU6785',gt:'GTIN-8',gn:'096867556922',charges:[{t:'Warranty',c:150}]};
+ S.uid=3;S.invoice='1234';S.deposit={m:'Progressive card on file',a:'500.00'};
+ if(stage==='item'){S.items=[A];}
+ else{S.items=[A,B];S.stage=stage;}
+ if(stage==='confirmed'||stage==='funded'||stage==='closed'){S.deliveries=[{id:1,type:'Ship',date:'2026-08-09',carrier:'Fedex',track:'A123456789876',ids:[1,2]}];S.items.forEach(i=>i.del=1);}
+ if(stage==='awaiting'){S.sel=[1,2];}
+}
+/* ---------- actions ---------- */
+const A={
+ navtoast(){toast('This section is not part of the prototyped flow');},
+ addfirst(){S.adding=true;},additem(){S.adding=true;},
+ cancelform(){S.adding=false;S.form=blank().form;},
+ qm(){S.form.qty=Math.max(1,S.form.qty-1);},qp(){S.form.qty++;},
+ cond(e,d){S.form.cond=d.v;},
+ saveitem(){
+  const f=S.form;if(!formOK())return;
+  if(cash()+Number(f.cost)*f.qty>APPROVAL){const e=document.getElementById('ferr');e.style.display='block';e.textContent='Item cost exceeds the remaining approval ('+$(APPROVAL-cash())+').';return 'skip';}
+  S.items.push({id:S.uid++,brand:f.brand.trim(),desc:f.desc.trim(),cost:f.cost,qty:f.qty,cond:f.cond,pid:f.pid.trim(),gt:f.gt,gn:f.gn.trim(),charges:[]});
+  if(!S.deposit.m){S.deposit={m:'Progressive card on file',a:'500.00'};}
+  S.adding=false;S.form=blank().form;toast('Item added to the lease');
+ },
+ menu(e,d){S.menu=S.menu==Number(d.i)?null:Number(d.i);},
+ rmitem(e,d){S.items=S.items.filter(i=>i.id!==Number(d.i));S.menu=null;toast('Item removed');},
+ opencharge(e,d){S.cid=Number(d.i);S.cform={t:'',c:''};S.drawer='charge';S.menu=null;},
+ closedrawer(){S.drawer=null;},
+ savecharge(){if(!(S.cform.t&&Number(S.cform.c)>0))return 'skip';const it=S.items.find(i=>i.id===S.cid);
+  if(cash()+Number(S.cform.c)>APPROVAL){toast('Charge exceeds the remaining approval');return;}
+  it.charges.push({t:S.cform.t,c:Number(S.cform.c)});S.drawer=null;toast('Additional charge added');},
+ askrm(e,d){S.modal={t:'rm',i:Number(d.i),k:Number(d.k)};},
+ dorm(){const it=S.items.find(i=>i.id===S.modal.i);it.charges.splice(S.modal.k,1);S.modal=null;toast('Charge removed');},
+ closemodal(){S.modal=null;},
+ send(){if(!sendOK())return 'skip';S.stage='submitted';toast('Agreement sent to the customer');window.scrollTo(0,0);},
+ sign(){S.stage='awaiting';S.sel=S.items.map(i=>i.id);toast('Customer signed the agreement');},
+ tab(e,d){S.tab=d.t;},
+ selitem(e,d){const id=Number(d.i);S.sel=S.sel.includes(id)?S.sel.filter(x=>x!==id):[...S.sel,id];},
+ selall(){const p=pending().map(i=>i.id);S.sel=p.every(x=>S.sel.includes(x))?[]:p;},
+ opendelivery(){S.dform={type:'Ship',date:'',carrier:'',track:'',ids:[...S.sel]};S.drawer='delivery';},
+ dtype(e,d){S.dform.type=d.v;},
+ delrm(e,d){S.dform.ids=S.dform.ids.filter(x=>x!==Number(d.i));},
+ confirmdel(){if(!delOK())return 'skip';const d=S.dform,id=S.deliveries.length+1;
+  S.deliveries.push({id,type:d.type,date:d.date,carrier:d.carrier,track:d.track.trim(),ids:[...d.ids]});
+  S.items.forEach(i=>{if(d.ids.includes(i.id))i.del=1});S.sel=S.sel.filter(x=>!d.ids.includes(x));S.drawer=null;
+  if(!pending().length){S.stage='confirmed';window.scrollTo(0,0);}
+  const fd=new Date(d.date+'T12:00:00').toLocaleDateString('en-US');
+  if(d.type==='Pickup')notify('Pickup date submitted','The pickup date was set for '+fd);
+  else notify('Delivery date submitted','The delivery date was set for '+fd);},
+ closenotif(){S.notif=null;},
+ togg(e,d){const id=Number(d.d);S.closed[id]=!S.closed[id];},
+ fund(){S.stage='funded';toast('Lease funded');window.scrollTo(0,0);},
+ closelease(){S.stage='closed';toast('Lease closed');window.scrollTo(0,0);},
+ notes(){S.modal={t:'notes'};},savenotes(){S.notes=document.getElementById('nt').value;S.modal=null;toast('Note saved');},
+ viewinv(){S.modal={t:'inv'};},cancelagr(){S.modal={t:'cancel'};},
+ docancel(){S=blank();toast('Agreement cancelled');},
+ print(){toast('Preparing unsigned agreement…');},return(){toast('Return process started');},
+ reset(){S=blank();},
+ jump(e){const v=e.target.value;if(!v)return;if(v==='empty')S=blank();else seed(v);window.scrollTo(0,0);}
+};
+document.addEventListener('click',e=>{
+ if(!e.target.closest('.menu,.more')&&S.menu){S.menu=null;render();}
+ const a=e.target.closest('[data-a]');if(!a||a.tagName==='SELECT'||(a.tagName==='INPUT'&&a.type==='radio'&&e.type!=='click'))return;
+ const f=A[a.dataset.a];if(!f)return;
+ if(a.dataset.a==='closedrawer'&&e.target!==a&&e.target.closest('.dr')&&!e.target.closest('button'))return;
+ if(f(e,a.dataset)==='skip')return;render();
+});
+document.addEventListener('change',e=>{
+ const a=e.target.closest('[data-a="jump"]');if(a){A.jump(e);render(false);return;}
+ const t=e.target;
+ if(t.dataset.k==='seller'){S.seller=t.value;}
+ if(t.dataset.dep){S.deposit[t.dataset.dep]=t.value;render();return;}
+ if(t.dataset.f==='gt'){S.form.gt=t.value;}
+ if(t.dataset.cf==='t'){S.cform.t=t.value;render();return;}
+ if(t.dataset.df==='carrier'||t.dataset.df==='date'){S.dform[t.dataset.df]=t.value;render();return;}
+});
+document.addEventListener('input',e=>{
+ const t=e.target,tg=(id,ok)=>{const b=document.getElementById(id);if(b)b.disabled=!ok;};
+ if(t.dataset.k==='invoice'){S.invoice=t.value;const b=document.getElementById('btnSend'),ok=sendOK();if(b){b.disabled=!ok;b.classList.toggle('ok',!!ok);}}
+ if(t.dataset.f&&t.dataset.f!=='gt'){S.form[t.dataset.f]=t.value;tg('btnAdd',formOK());const er=document.getElementById('ferr');if(er)er.style.display='none';}
+ if(t.dataset.cf==='c'){S.cform.c=t.value;tg('btnCh',S.cform.t&&Number(S.cform.c)>0);}
+ if(t.dataset.df==='track'){S.dform.track=t.value;tg('btnDel',delOK());}
+ if(t.dataset.dep==='a'){S.deposit.a=t.value;const el=document.getElementById('sumc');if(el)el.innerHTML=summaryInner();}
+});
+render();
+</script>
+</body>
+</html>

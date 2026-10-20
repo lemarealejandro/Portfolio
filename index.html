@@ -350,7 +350,7 @@
                   Seleccionar Escenario de Trabajo:
                 </label>
                 <select id="ai-scenario-select" class="ai-scenario-select">
-                  <option value="checkout_friction">1. Progressive Leasing (Checkout Lease-to-Own & Claude)</option>
+                  <option value="checkout_friction">1. Progressive Leasing (Originación RLD, Carrito ODS & Firma QR)</option>
                   <option value="gemini_multimodal">2. Auditoría Multimodal de Jerarquía Visual (Gemini 2.5)</option>
                   <option value="usability_synthesis">3. Síntesis Cuantitativa de Pruebas A/B (Cart Testing Framework)</option>
                   <option value="business_okr">4. Banco Bci: Alineación UX con OKRs de Inversiones</option>
@@ -477,9 +477,9 @@
                 <span class="case-company">Progressive Leasing (Utah, EE.UU.)</span>
                 <span class="case-period">2024 - Presente</span>
               </div>
-              <h3 class="case-title">React Flow Builder & Portal Operativo Lease-to-Own</h3>
+              <h3 class="case-title">Orquestación de Crédito, Carrito ODS & Firma QR 'Scan to Sign'</h3>
               <p class="case-desc">
-                Transformé un proceso burocrático de semanas en un orquestador visual intuitivo de reglas y aprobaciones para retail masivo en EE.UU., acelerando la síntesis de pruebas de usabilidad con Claude Cowork para reducir un 38% el tiempo de configuración y asegurar 100% de compliance.
+                Lideré el diseño de experiencia para Progressive Leasing (Utah, EE.UU.) en ProgCentral: diseñé el flujo de originación y captura de depósitos RLD, la resiliencia en el Carrito ODS (Order Delivery System) y la innovación de 'Scan to Sign' (firma de contratos mediante QR en tienda), acelerando la síntesis con Claude Cowork para reducir un 38% el tiempo de configuración y asegurar 100% de compliance.
               </p>
               <div class="case-metrics-strip">
                 <div class="case-metric-item">
@@ -1070,6 +1070,25 @@
             </h4>
             <p id="modal-solution" style="font-size: 0.9rem; color: #CBD5E1; line-height: 1.6;"></p>
           </div>
+        </div>
+
+        <!-- Specific Initiatives Breakdown (Jira Epics / Features) -->
+        <div id="modal-initiatives-section" style="margin-bottom: 28px; display: none;">
+          <h4 style="font-size: 1.15rem; margin-bottom: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+            <span>🚀</span> Módulos & Épicas Diseñadas en Producción
+          </h4>
+          <div id="modal-initiatives-grid" style="display: flex; flex-direction: column; gap: 12px;"></div>
+        </div>
+
+        <!-- Live Prototype Banner if available -->
+        <div id="modal-prototype-banner" style="margin-bottom: 24px; display: none; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--border-glow); padding: 18px 22px; border-radius: var(--radius-md); justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h5 style="font-size: 1rem; color: #FFFFFF; margin-bottom: 3px;">Prototipo Interactivo Funcional Disponible</h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Explora el flujo de Carrito ODS y Estimador de Pagos desarrollado para ProgCentral.</p>
+          </div>
+          <a id="modal-prototype-link" href="#" target="_blank" class="btn btn-primary btn-sm">
+            <span>Abrir Prototipo ODS ↗</span>
+          </a>
         </div>
 
         <!-- Gallery / Screenshots -->

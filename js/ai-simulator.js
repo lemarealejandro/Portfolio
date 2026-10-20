@@ -5,18 +5,18 @@
 const aiScenarios = {
   checkout_friction: {
     model: "Claude 3.7 Sonnet (Claude Cowork Framework)",
-    task: "Análisis Heurístico de Fricción en Funnel de Lease-to-Own",
-    inputPrompt: "Analizar el funnel de checkout de Progressive Leasing. Identificar puntos de abandono en la selección de cuotas y generar recomendaciones heurísticas priorizadas por impacto en conversión y esfuerzo de desarrollo.",
+    task: "Originación RLD, Carrito ODS y Firma QR 'Scan to Sign'",
+    inputPrompt: "Analizar el flujo de originación RLD y Carrito ODS en ProgCentral (Progressive Leasing). Identificar causas de discrepancia entre lease y orden de compra, optimizar el Payment Estimator y modelar el flujo de firma sin contacto 'Scan to Sign'.",
     output: [
-      { type: "tag", text: "⚡ [CLAUDE_COWORK] Iniciando evaluación heurística..." },
-      { type: "text", text: "Analizando 12 pantallas del flujo de pago y 420 transcripciones de usuarios..." },
-      { type: "highlight", text: "Detección de Fricciones Críticas:" },
-      { type: "text", text: "1. Sobrecarga cognitiva en el desglose de tarifas de entrega (Task Success decayó al 38%)." },
-      { type: "text", text: "2. Ambigüedad en la selección de periodicidad (quincenal vs mensual)." },
-      { type: "highlight", text: "Solución de Diseño UX Propuesta:" },
-      { type: "text", text: "• Agrupar costo transparente 'Total Lease Cost' con toggle dinámico de cálculo en vivo." },
-      { type: "text", text: "• Reducir de 4 pasos a 2 pantallas con feedback progresivo y confirmación visual inmediata." },
-      { type: "impact", text: "📈 Impacto Estimado en Negocio: +14.2% Tasa de Conversión | -28% Consultas de soporte" }
+      { type: "tag", text: "⚡ [CLAUDE_COWORK] Analizando flujos de ProgCentral (MS-3625 / MS-3772)..." },
+      { type: "text", text: "Procesando pantallas de Payment Estimator, carrito ODS y capturas de RLD..." },
+      { type: "highlight", text: "Detección de Fricciones & Puntos Críticos:" },
+      { type: "text", text: "1. Discrepancia entre ítems del lease y orden ODS bloqueaba la finalización en caja (MS-3814)." },
+      { type: "text", text: "2. Fricción y demora física al firmar contratos en pantallas compartidas de retail." },
+      { type: "highlight", text: "Solución de Diseño UX Implementada:" },
+      { type: "text", text: "• Modal de Firma QR 'Scan to Sign' para traspaso fluido del contrato al smartphone del cliente (MS-3772)." },
+      { type: "text", text: "• Panel de alerta con resolución automática de discrepancias y estado de carga previo en ODS." },
+      { type: "impact", text: "📈 Impacto Comprobado: -38% Tiempo de ciclo en caja | 94% Tasa de éxito en originación" }
     ]
   },
   gemini_multimodal: {

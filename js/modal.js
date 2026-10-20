@@ -4,27 +4,55 @@
 
 const caseStudiesData = {
   progleasing: {
-    title: "Sistema de Workflows y Portal Operativo Lease-to-Own",
+    title: "Orquestación de Crédito, Carrito ODS & Firma QR 'Scan to Sign'",
     company: "Progressive Leasing | Utah, EE.UU. (vía Ki Technologies)",
     role: "Senior UX Designer",
     period: "Diciembre 2024 - Presente",
-    tag: "Fintech Enterprise & IA",
+    tag: "Fintech Enterprise & IA • ProgCentral",
     coverImage: "assets/images/03-react-flow-builder.png",
+    prototypeUrl: "assets/prototipo-flujo-ods-progcentral.html",
     gallery: [
       { src: "assets/images/03-react-flow-builder.png", caption: "React Flow Builder: Editor visual de reglas y nodos de aprobación multinivel" },
-      { src: "assets/images/08-execution-monitor.png", caption: "Execution Monitor: Tablero en tiempo real de estados de flujos" },
-      { src: "assets/images/01-workflow-definitions.png", caption: "Definiciones de Workflows: Vista de catálogo con filtrado de gobernanza" },
+      { src: "assets/images/08-execution-monitor.png", caption: "Execution Monitor: Tablero en tiempo real de estados de flujos operativos" },
+      { src: "assets/images/01-workflow-definitions.png", caption: "Definiciones de Workflows: Catálogo y gobernanza de flujos de aprobación" },
       { src: "assets/images/10-review-request-detail.png", caption: "Detalle de revisión: Formulario con aprobación en 1-click y trazabilidad de rechazos" }
     ],
-    overview: "Progressive Leasing es el líder en soluciones de arrendamiento con opción a compra en el retail de Estados Unidos. Lideré el diseño integral de la arquitectura y la experiencia de usuario del portal operativo 'ProgCentral' y la herramienta 'React Flow Builder' para la gestión de flujos de aprobación y gobernanza interna.",
-    challenge: "Los equipos de operaciones y riesgo en EE.UU. dependían de configuraciones manuales en base de datos para modificar reglas de aprobación entre roles (RM, CCL, Account Managers). Esto generaba cuellos de botella de hasta 3 semanas y un alto índice de errores operacionales.",
-    solution: "Diseñé un constructor visual de nodos drag-and-drop con validación lógica en tiempo real. Apliqué síntesis de usabilidad asistida por IA (Claude Cowork) para procesar grabaciones de usuarios y optimizar el tiempo de configuración y la reducción de carga cognitiva.",
+    overview: "Progressive Leasing es el líder en soluciones de financiamiento Lease-to-Own en el retail de Estados Unidos. Como Senior UX Designer, diseñé flujos críticos para el portal 'ProgCentral', abordando la originación de crédito, resiliencia del carrito ODS (Order Delivery System), módulos de devolución y la innovación de firma sin contacto 'Scan to Sign'.",
+    challenge: "El personal de retail y operaciones en EE.UU. enfrentaba sistemas fragmentados: bloqueos por discrepancias entre órdenes de compra y contratos de leasing, demoras en caja para la firma de acuerdos y falta de visibilidad en estados de pago (RLD) y entornos de ejecución.",
+    solution: "Diseñé experiencias modulares de alta tolerancia a fallos: un estimador de pagos en Home, el flujo de captura de RLD, un panel de resolución de discrepancias en carrito ODS, y la arquitectura de 'Scan to Sign' (firma vía QR). Aceleré la síntesis de pruebas con Claude Cowork para validar decisiones con stakeholders en Utah.",
     metrics: [
       { val: "-38%", label: "Tiempo de configuración de flujos" },
       { val: "94%", label: "Tasa de éxito en tareas de revisión" },
-      { val: "100%", label: "Aprobación en compliance normativo en EE.UU." }
+      { val: "100%", label: "Cumplimiento normativo y Okta Security" }
     ],
-    skills: ["React Flow UI", "Claude Prompt Framework", "Usability Testing Synthesis", "Design Systems", "Enterprise FinTech", "B2B SaaS"]
+    initiatives: [
+      {
+        icon: "📱",
+        title: "Firma y Contratos: 'Scan to Sign' (MS-3678, MS-3772)",
+        desc: "POC y mockups finales del modal interactivo de firma mediante código QR en la pantalla de confirmación. Permite al cliente retail escanear el QR desde su propio smartphone y firmar el contrato de arrendamiento sin tocar hardware compartido en tienda."
+      },
+      {
+        icon: "💳",
+        title: "Flujos de Pago y Originación RLD (MS-3625, MS-3392, MS-3906)",
+        desc: "Diseño del flujo de originación para capturar el método de pago y el depósito recurrente de arrendamiento (RLD). Optimización del 'Payment Estimator' en la pantalla principal y modernización de componentes obsoletos en el carrito ODS."
+      },
+      {
+        icon: "🛒",
+        title: "Carrito ODS & Manejo de Estados Críticos (MS-3812 a MS-3816)",
+        desc: "Mapeo exhaustivo de edge cases en punto de venta: estados de carga previos, panel de alerta cuando el contrato de leasing y la orden de ODS no coinciden, captura guiada de identificadores UPC/GTIN y control de sesión del operador."
+      },
+      {
+        icon: "🔄",
+        title: "Devoluciones con RLD & Transferencia de Clientes (MS-3336, MS-3369, MS-3644, MS-3645)",
+        desc: "Flujo de resolución post-venta para devolución de artículos y actualización de facturas de devolución. Módulo de transferencia de clientes entre operadores para estados 'Aprobado' y 'En espera de entrega'."
+      },
+      {
+        icon: "🔒",
+        title: "Seguridad Okta, Spikes Técnicos & Entornos (MS-3168, MS-3240, MS-3682, MS-3208)",
+        desc: "Diseño de indicadores visuales de entorno (Stage vs Prod) en ProgCentral, ofuscación de valores sensibles/secretos, integración de políticas de contraseñas de Okta y documentación formal del proceso de diseño UX."
+      }
+    ],
+    skills: ["Scan to Sign QR", "Order Delivery System (ODS)", "Payment Estimator", "RLD Originación", "React Flow UI", "Claude Prompt Framework", "Okta Security UX", "FinTech USA"]
   },
   bancobci: {
     title: "Democratización de Plataforma de Inversiones Digitales",
@@ -112,6 +140,48 @@ function initModal() {
     document.getElementById("modal-overview").textContent = data.overview;
     document.getElementById("modal-challenge").textContent = data.challenge;
     document.getElementById("modal-solution").textContent = data.solution;
+
+    // Render Initiatives / Epic breakdown if present
+    const initSection = document.getElementById("modal-initiatives-section");
+    const initGrid = document.getElementById("modal-initiatives-grid");
+    if (initSection && initGrid) {
+      if (data.initiatives && data.initiatives.length > 0) {
+        initGrid.innerHTML = "";
+        data.initiatives.forEach(item => {
+          const card = document.createElement("div");
+          card.style.background = "rgba(255, 255, 255, 0.03)";
+          card.style.border = "1px solid var(--border-subtle)";
+          card.style.borderRadius = "12px";
+          card.style.padding = "16px 20px";
+          card.style.display = "flex";
+          card.style.gap = "14px";
+          card.style.alignItems = "flex-start";
+          card.innerHTML = `
+            <span style="font-size: 1.4rem; line-height: 1; flex-shrink: 0; padding-top: 2px;">${item.icon}</span>
+            <div>
+              <h5 style="font-size: 0.98rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">${item.title}</h5>
+              <p style="font-size: 0.88rem; color: #CBD5E1; margin: 0; line-height: 1.55;">${item.desc}</p>
+            </div>
+          `;
+          initGrid.appendChild(card);
+        });
+        initSection.style.display = "block";
+      } else {
+        initSection.style.display = "none";
+      }
+    }
+
+    // Render Live Prototype Banner if present
+    const protoBanner = document.getElementById("modal-prototype-banner");
+    const protoLink = document.getElementById("modal-prototype-link");
+    if (protoBanner && protoLink) {
+      if (data.prototypeUrl) {
+        protoLink.href = data.prototypeUrl;
+        protoBanner.style.display = "flex";
+      } else {
+        protoBanner.style.display = "none";
+      }
+    }
 
     // Render Gallery
     const galleryContainer = document.getElementById("modal-gallery-container");
