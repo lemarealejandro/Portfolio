@@ -30,9 +30,9 @@
   height: 100%;
   max-width: 1440px;
   width: 100%;
-  padding-left: clamp(16px, 2.5vw, 36px);
-  padding-right: clamp(16px, 2.5vw, 36px);
-  gap: 16px;
+  padding-left: clamp(14px, 2.5vw, 36px);
+  padding-right: clamp(14px, 2.5vw, 36px);
+  gap: 10px;
 }
 
 .brand-logo {
@@ -475,42 +475,8 @@
 /* --------------------------------------------------------------------------
    Responsive Media Queries
    -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .hero-visual-card {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .kpi-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .triad-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .cases-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .cert-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
-  .ai-terminal-body {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* ── Tablet Large (≤ 1120px): Collapse nav to hamburger ── */
 @media (max-width: 1120px) {
   .nav-links {
     position: fixed;
@@ -518,17 +484,27 @@
     left: 0;
     right: 0;
     background: var(--bg-app);
-    padding: 24px;
+    padding: 24px 20px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 4px;
     border-bottom: 1px solid var(--border-subtle);
     display: none;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    overflow-y: auto;
+    max-height: calc(100vh - var(--header-height));
   }
 
   .nav-links.open {
     display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border-radius: var(--radius-sm);
   }
 
   .mobile-menu-btn {
@@ -536,40 +512,427 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.2rem;
+/* ── Tablet (≤ 1024px): 2-col → 1-col grids ── */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .section {
-    padding: 60px 0;
+  .hero-visual-card {
+    max-width: 480px;
+    margin: 0 auto;
   }
 
   .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .triad-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cases-grid {
     grid-template-columns: 1fr;
   }
 
   .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ai-terminal-body {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .floating-badge {
-    position: static;
-    margin-top: 14px;
-    animation: none;
-  }
-
-  .modal-body {
-    padding: 24px;
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
-@media (max-width: 520px) {
+/* ── Mobile (≤ 768px): Full mobile layout ── */
+@media (max-width: 768px) {
+
+  /* Container padding */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Section spacing */
+  .section {
+    padding: 56px 0;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  /* ── Header ── */
+  .header-container {
+    gap: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    min-width: 0;
+  }
+
+  .brand-logo {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-text {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-monogram {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .brand-role-chip {
     display: none;
   }
 
-  .brand-name {
-    font-size: 1.12rem;
+  .nav-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* CV button: hide text label, keep icon and chevron */
+  .cv-dropdown-trigger > span {
+    display: none;
+  }
+
+  /* ── Hero ── */
+  .hero-section {
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: 48px;
+    min-height: auto;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    letter-spacing: -0.025em;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .hero-status-pill {
+    font-size: 0.78rem;
+    padding: 7px 14px;
+    white-space: normal;
+    line-height: 1.4;
+    max-width: 100%;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-highlights-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Hero image: hidden on mobile to save space */
+  .hero-visual-card {
+    display: none;
+  }
+
+  /* ── KPI Cards ── */
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .kpi-card {
+    padding: 18px 14px;
+  }
+
+  .kpi-number {
+    font-size: 2.2rem;
+  }
+
+  .kpi-label {
+    font-size: 0.82rem;
+  }
+
+  /* ── Triad Cards ── */
+  .triad-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .triad-card {
+    padding: 24px 20px;
+  }
+
+  .triad-icon-box {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  .triad-card h3 {
+    font-size: 1.15rem;
+  }
+
+  /* ── AI Sandbox / Terminal ── */
+  .ai-terminal-wrapper {
+    margin-top: 24px;
+    border-radius: var(--radius-md);
+  }
+
+  .ai-terminal-header {
+    padding: 10px 14px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .terminal-title {
+    font-size: 0.72rem;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ai-terminal-body {
+    padding: 16px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .ai-terminal-output {
+    min-height: 200px;
+    font-size: 0.8rem;
+    padding: 14px;
+  }
+
+  /* Matrix table: scroll horizontally */
+  .matrix-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .matrix-table {
+    min-width: 560px;
+    font-size: 0.8rem;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    padding: 10px 12px;
+  }
+
+  /* ── Case Studies ── */
+  .cases-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cases-filter-bar {
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .case-content {
+    padding: 20px;
+  }
+
+  .case-title {
+    font-size: 1.15rem;
+  }
+
+  .case-metrics-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ── Certifications ── */
+  .cert-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .cert-card {
+    padding: 20px;
+  }
+
+  /* ── Timeline / Trayectoria ── */
+  .timeline-container {
+    padding: 10px 0;
+  }
+
+  .timeline-container::before {
+    left: 14px;
+  }
+
+  .timeline-item {
+    padding-left: 44px;
+    margin-bottom: 28px;
+  }
+
+  .timeline-marker {
+    left: 5px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .timeline-content {
+    padding: 18px;
+  }
+
+  .timeline-role {
+    font-size: 1.05rem;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* ── Contact ── */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-info-card {
+    padding: 24px 20px;
+  }
+
+  .contact-form {
+    padding: 24px 20px;
+  }
+
+  .contact-channel {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .modal-container {
+    max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .modal-body {
+    padding: 20px 16px;
+  }
+
+  /* ── Floating Badges ── */
+  .floating-badge {
+    position: static;
+    margin-top: 12px;
+    animation: none;
+  }
+
+  /* ── Buttons ── */
+  .btn-lg {
+    padding: 13px 24px;
+    font-size: 0.95rem;
   }
 }
+
+/* ── Small Mobile (≤ 480px): Extra adjustments ── */
+@media (max-width: 480px) {
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kpi-number {
+    font-size: 1.9rem;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+  }
+
+  /* CV dropdown: show only icon on very small screens */
+  .cv-dropdown-trigger {
+    padding: 8px 10px;
+    gap: 4px;
+  }
+
+  .cases-filter-bar {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+  }
+
+  .terminal-title span:last-child {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    padding: 36px 0 20px;
+    font-size: 0.82rem;
+  }
+}
+
