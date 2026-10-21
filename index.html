@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alejandro Le Mare Mendoza | Senior UX Designer & AI Product Strategist</title>
-  
+
   <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Portafolio de Alejandro Le Mare Mendoza: Senior UX Designer con más de una década de experiencia liderando diseño para Progressive Leasing (EE.UU.), Banco BCI, Falabella y Santander. Especialista en IA generativa (Claude, Gemini) y estrategia de negocio orientada a ROI.">
-  <meta name="keywords" content="Alejandro Le Mare, Senior UX Designer, Product Strategist, IA UX, Claude, Gemini, Progressive Leasing, Banco Bci, Falabella, Design System, UX Chile, Portafolio UX">
+  <meta name="description"
+    content="Portafolio de Alejandro Le Mare Mendoza: Senior UX Designer con más de una década de experiencia liderando diseño para Progressive Leasing (EE.UU.), Banco BCI, Falabella y Santander. Especialista en IA generativa (Claude, Gemini) y estrategia de negocio orientada a ROI.">
+  <meta name="keywords"
+    content="Alejandro Le Mare, Senior UX Designer, Product Strategist, IA UX, Claude, Gemini, Progressive Leasing, Banco Bci, Falabella, Design System, UX Chile, Portafolio UX">
   <meta name="author" content="Alejandro Le Mare Mendoza">
   <meta property="og:title" content="Alejandro Le Mare Mendoza | Senior UX Designer & AI Product Strategist">
-  <meta property="og:description" content="Diseño de productos digitales de alto impacto que conectan la visión de negocio con la experiencia humana, potenciados por IA (Claude & Gemini).">
+  <meta property="og:description"
+    content="Diseño de productos digitales de alto impacto que conectan la visión de negocio con la experiencia humana, potenciados por IA (Claude & Gemini).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/alejandro_hero.jpg">
 
   <!-- Google Fonts: Outfit, Plus Jakarta Sans, Space Grotesk & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
@@ -25,6 +31,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/layout.css">
 </head>
+
 <body>
 
   <!-- ==========================================================================
@@ -58,17 +65,57 @@
         <!-- Theme Toggle Button -->
         <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambiar tema">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
           </svg>
         </button>
 
-        <!-- CV Direct Link / Modal -->
-        <a href="assets/Alejandro_Lemare_Resume.pdf" target="_blank" class="btn btn-secondary btn-sm" id="btn-download-resume">
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          CV en PDF
-        </a>
+        <!-- CV Dropdown Menu (ES & EN) -->
+        <div class="cv-dropdown-wrapper" id="cv-dropdown">
+          <button class="btn btn-secondary btn-sm cv-dropdown-trigger" id="cv-dropdown-btn" aria-expanded="false"
+            aria-haspopup="true">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+              </path>
+            </svg>
+            <span>Descargar CV</span>
+            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="dropdown-chevron">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <div class="cv-dropdown-menu" id="cv-dropdown-menu">
+            <a href="assets/Alejandro_Le_Mare_CV_ES.pdf" target="_blank" class="cv-dropdown-item"
+              download="Alejandro_Le_Mare_CV_ES.pdf">
+              <span class="cv-item-flag">🇪🇸</span>
+              <div class="cv-item-info">
+                <span class="cv-item-title">CV en Español (PDF)</span>
+                <span class="cv-item-meta">Versión oficial • 3 páginas</span>
+              </div>
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="cv-item-arrow">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+            </a>
+
+            <div class="cv-dropdown-divider"></div>
+
+            <a href="assets/Alejandro_Le_Mare_Resume_EN.pdf" target="_blank" class="cv-dropdown-item"
+              download="Alejandro_Le_Mare_Resume_EN.pdf">
+              <span class="cv-item-flag">🇺🇸</span>
+              <div class="cv-item-info">
+                <span class="cv-item-title">Resume in English (PDF)</span>
+                <span class="cv-item-meta">US Executive format • 2 pages</span>
+              </div>
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="cv-item-arrow">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
 
         <!-- Mobile Menu Trigger -->
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
@@ -87,7 +134,7 @@
     <section class="section hero-section" id="hero">
       <div class="container">
         <div class="hero-grid">
-          
+
           <!-- Hero Text Content -->
           <div class="hero-content">
             <div class="hero-status-pill">
@@ -96,25 +143,32 @@
             </div>
 
             <h1 class="hero-title">
-              Diseño experiencias que las personas adoptan y que 
+              Diseño experiencias que las personas adoptan y que
               <span class="gradient-text">hacen crecer el negocio</span>, aceleradas con IA.
             </h1>
 
             <p class="hero-description">
-              El buen diseño no es ornamental: debe resolver un dolor humano real y mover las métricas de la empresa. Con más de 12 años liderando productos para gigantes de FinTech y Banca (<strong>Progressive Leasing EE.UU.</strong>, <strong>Banco Bci</strong>, <strong>Falabella</strong>, <strong>Santander</strong>), integro <strong>Claude</strong> y <strong>Gemini</strong> como aceleradores estratégicos: elimino suposiciones, sintetizo research en minutos y entrego soluciones con impacto directo en conversión, retención y ROI.
+              El buen diseño no es ornamental: debe resolver un dolor humano real y mover las métricas de la empresa.
+              Con más de 12 años liderando productos para gigantes de FinTech y Banca (<strong>Progressive Leasing
+                EE.UU.</strong>, <strong>Banco Bci</strong>, <strong>Falabella</strong>, <strong>Santander</strong>),
+              integro <strong>Claude</strong> y <strong>Gemini</strong> como aceleradores estratégicos: elimino
+              suposiciones, sintetizo research en minutos y entrego soluciones con impacto directo en conversión,
+              retención y ROI.
             </p>
 
             <div class="hero-cta-group">
               <a href="#casos" class="btn btn-primary btn-lg" id="hero-cta-cases">
                 Explorar Casos de Estudio
                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                  </path>
                 </svg>
               </a>
 
               <a href="#simulador" class="btn btn-secondary btn-lg" id="hero-cta-sandbox">
                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+                  </path>
                 </svg>
                 Probar AI Sandbox
               </a>
@@ -124,19 +178,24 @@
             <div class="hero-highlights-row">
               <div class="highlight-item">
                 <svg width="18" height="18" fill="none" stroke="#F59E0B" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                  </path>
                 </svg>
                 <span>Maestría en <strong>Claude & Gemini Cowork</strong></span>
               </div>
               <div class="highlight-item">
                 <svg width="18" height="18" fill="none" stroke="#10B981" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                 </svg>
                 <span>Impacto en <strong>OKRs, CAC, LTV y Conversión</strong></span>
               </div>
               <div class="highlight-item">
                 <svg width="18" height="18" fill="none" stroke="#6366F1" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                  </path>
                 </svg>
                 <span>Experiencia <strong>USA FinTech & LatAm</strong></span>
               </div>
@@ -158,7 +217,8 @@
 
             <!-- Main Image Wrapper -->
             <div class="hero-image-wrapper">
-              <img src="assets/images/alejandro_hero.jpg" alt="Alejandro Le Mare - Senior UX & AI Product Strategist" width="600" height="600" loading="eager">
+              <img src="assets/images/alejandro_hero.jpg" alt="Alejandro Le Mare - Senior UX & AI Product Strategist"
+                width="600" height="600" loading="eager">
             </div>
 
             <!-- Bottom Floating Card -->
@@ -186,7 +246,8 @@
             <div class="kpi-label">Usuarios Impactados en FinTech y Banca</div>
           </div>
           <div class="kpi-card">
-            <div class="kpi-number gradient-text-amber" data-target="38" data-prefix="-" data-suffix="%" style="color: #34D399;">-38%</div>
+            <div class="kpi-number gradient-text-amber" data-target="38" data-prefix="-" data-suffix="%"
+              style="color: #34D399;">-38%</div>
             <div class="kpi-label">Tiempo de Configuración en Workflows</div>
           </div>
           <div class="kpi-card">
@@ -206,37 +267,46 @@
         <div class="section-header">
           <div class="section-tag">
             <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+              <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z" />
             </svg>
             Propósito & Metodología
           </div>
           <h2 class="section-title">La Verdadera Intención: ¿Por qué Unir UX, Negocio e IA?</h2>
           <p class="section-subtitle">
-            Diseñar sin entender el negocio es perder el tiempo; diseñar sin empatía es perder usuarios; y diseñar sin IA hoy es trabajar a ciegas y con lentitud. Mi objetivo es equilibrar los tres factores para crear productos viables, rentables y profundamente humanos:
+            Diseñar sin entender el negocio es perder el tiempo; diseñar sin empatía es perder usuarios; y diseñar sin
+            IA hoy es trabajar a ciegas y con lentitud. Mi objetivo es equilibrar los tres factores para crear productos
+            viables, rentables y profundamente humanos:
           </p>
         </div>
 
         <div class="triad-grid">
-          
+
           <!-- UX Column -->
           <div class="glass-card triad-card">
             <div>
               <div class="triad-icon-box triad-icon-ux">🎨</div>
               <h3>Empatía Humana & UX End-to-End</h3>
               <p>
-                Entender la frustración del usuario en su punto más crítico. Traduzco procesos burocráticos y densos en experiencias fluidas donde cada acción se siente natural, segura y sin fricción.
+                Entender la frustración del usuario en su punto más crítico. Traduzco procesos burocráticos y densos en
+                experiencias fluidas donde cada acción se siente natural, segura y sin fricción.
               </p>
               <ul class="triad-list">
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Escucha activa e investigación cualitativa: detectar dónde el usuario duda o se rinde</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Arquitectura de información y orquestadores visuales complejos (React Flow)</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Accesibilidad universal WCAG 2.1 AA para no excluir a ningún segmento</span>
                 </li>
               </ul>
@@ -252,19 +322,26 @@
               <div class="triad-icon-box triad-icon-biz">💼</div>
               <h3>Mentalidad de Negocio & Retorno de Inversión (ROI)</h3>
               <p>
-                Cuidar los números y la sostenibilidad de la empresa. Cada flujo que diseño responde a un objetivo financiero claro: reducir costos, aumentar ingresos o fidelizar clientes.
+                Cuidar los números y la sostenibilidad de la empresa. Cada flujo que diseño responde a un objetivo
+                financiero claro: reducir costos, aumentar ingresos o fidelizar clientes.
               </p>
               <ul class="triad-list">
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Alineación estratégica con OKRs directivos y metas de rentabilidad trimestrales</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Optimización de embudos de conversión (CRO) y reducción de churn en checkout</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Disminución cuantificable de costos de soporte y fricción operacional interna</span>
                 </li>
               </ul>
@@ -280,19 +357,26 @@
               <div class="triad-icon-box triad-icon-ai">🤖</div>
               <h3>Inteligencia Artificial como Multiplicador Estratégico</h3>
               <p>
-                Dominio avanzado de Claude (Claude Cowork) y Google Gemini (Multimodal Vision). No uso la IA como un atajo superficial, sino para eliminar conjeturas y acelerar certezas.
+                Dominio avanzado de Claude (Claude Cowork) y Google Gemini (Multimodal Vision). No uso la IA como un
+                atajo superficial, sino para eliminar conjeturas y acelerar certezas.
               </p>
               <ul class="triad-list">
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Síntesis automatizada de 10+ pruebas de usabilidad en minutos vs. semanas</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Auditoría heurística visual y detección de anomalías de UI con Gemini Vision</span>
                 </li>
                 <li>
-                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                   <span>Desarrollo de tooling personalizado para squads (UX Analyzer con Claude SDK)</span>
                 </li>
               </ul>
@@ -313,12 +397,14 @@
     <section class="section" id="simulador" style="background: rgba(255, 255, 255, 0.01);">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); color: #FBBF24;">
+          <div class="section-tag"
+            style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); color: #FBBF24;">
             Demostrador Interactivo
           </div>
           <h2 class="section-title">La IA en la Práctica: De la Hipótesis al Impacto Real</h2>
           <p class="section-subtitle">
-            Aquí no hay conceptos abstractos. Explora en vivo cómo aplico prompts estructurados con Claude y Gemini para resolver problemas reales de negocio y acelerar decisiones de diseño:
+            Aquí no hay conceptos abstractos. Explora en vivo cómo aplico prompts estructurados con Claude y Gemini para
+            resolver problemas reales de negocio y acelerar decisiones de diseño:
           </p>
         </div>
 
@@ -336,37 +422,45 @@
               <span id="ai-task-name">Análisis Heurístico & Negocio</span>
             </div>
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #10B981;">● Online / Low-Latency</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #10B981;">● Online /
+                Low-Latency</span>
             </div>
           </div>
 
           <!-- Terminal Body -->
           <div class="ai-terminal-body">
-            
+
             <!-- Prompt Controls -->
             <div class="ai-prompt-controls">
               <div>
-                <label for="ai-scenario-select" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">
+                <label for="ai-scenario-select"
+                  style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">
                   Seleccionar Escenario de Trabajo:
                 </label>
                 <select id="ai-scenario-select" class="ai-scenario-select">
-                  <option value="checkout_friction">1. Progressive Leasing (Originación RLD, Carrito ODS & Firma QR)</option>
+                  <option value="checkout_friction">1. Progressive Leasing (Originación RLD, Carrito ODS & Firma QR)
+                  </option>
                   <option value="gemini_multimodal">2. Auditoría Multimodal de Jerarquía Visual (Gemini 2.5)</option>
-                  <option value="usability_synthesis">3. Síntesis Cuantitativa de Pruebas A/B (Cart Testing Framework)</option>
+                  <option value="usability_synthesis">3. Síntesis Cuantitativa de Pruebas A/B (Cart Testing Framework)
+                  </option>
                   <option value="business_okr">4. Banco Bci: Alineación UX con OKRs de Inversiones</option>
                 </select>
               </div>
 
               <div>
-                <label for="ai-prompt-input" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">
+                <label for="ai-prompt-input"
+                  style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">
                   Prompt Estructurado / Input de Negocio:
                 </label>
-                <textarea id="ai-prompt-input" class="form-textarea" rows="4" readonly style="font-family: var(--font-mono); font-size: 0.85rem; background: rgba(0,0,0,0.3); color: #93C5FD;"></textarea>
+                <textarea id="ai-prompt-input" class="form-textarea" rows="4" readonly
+                  style="font-family: var(--font-mono); font-size: 0.85rem; background: rgba(0,0,0,0.3); color: #93C5FD;"></textarea>
               </div>
 
               <button id="ai-run-btn" class="btn btn-primary btn-sm" style="align-self: flex-start;">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 Ejecutar Síntesis con IA
               </button>
@@ -381,14 +475,16 @@
         </div>
 
         <!-- Practical Framework Callout (from cart_testing_synthesis_framework.md) -->
-        <div style="margin-top: 40px; padding: 24px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);">
+        <div
+          style="margin-top: 40px; padding: 24px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
             <div style="display: flex; align-items: center; gap: 14px;">
               <span style="font-size: 1.8rem;">📋</span>
               <div>
                 <h4 style="font-size: 1.05rem; margin-bottom: 2px;">Framework Real de Síntesis: Progressive Leasing</h4>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">
-                  Matriz de afinidad, tiempo por tarea y cálculo de confianza (A/B Testing Synthesis) documentada en mi metodología.
+                  Matriz de afinidad, tiempo por tarea y cálculo de confianza (A/B Testing Synthesis) documentada en mi
+                  metodología.
                 </p>
               </div>
             </div>
@@ -450,7 +546,8 @@
           </div>
           <h2 class="section-title">Casos de Estudio: Problemas Reales, Impacto Medible</h2>
           <p class="section-subtitle">
-            Historias reales de cómo la investigación centrada en las personas, la visión de negocio y la aceleración con IA resolvieron fricciones críticas en grandes organizaciones:
+            Historias reales de cómo la investigación centrada en las personas, la visión de negocio y la aceleración
+            con IA resolvieron fricciones críticas en grandes organizaciones:
           </p>
         </div>
 
@@ -465,21 +562,64 @@
 
         <!-- Cases Grid -->
         <div class="cases-grid">
-          
-          <!-- Case 1: Progressive Leasing -->
+
+          <!-- Case 1: Progressive Leasing - ODS Project Journey -->
+          <div class="glass-card case-card" data-category="fintech ai" data-case-id="ods_progleasing">
+            <div class="case-media">
+              <span class="case-overlay-tag">ODS Discovery • FinTech EE.UU.</span>
+              <img src="assets/images/ods.png" alt="Progressive Leasing ODS Project Journey" loading="lazy">
+            </div>
+            <div class="case-content">
+              <div class="case-client-row">
+                <span class="case-company">Progressive Leasing (Utah, EE.UU.)</span>
+                <span class="case-period">2024 - 2026</span>
+              </div>
+              <h3 class="case-title">ODS Project Journey: Discovery Técnico, Arquitectura de Entrega & Prototipado</h3>
+              <p class="case-desc">
+                Transformé documentación técnica abstracta y sin referencias visuales en una arquitectura UX lista para
+                producción: lideré un viaje de 8 fases coordinando ProgCentral, MyStore BFF, EA e Ingeniería, acelerando
+                la síntesis con Claude y validando contratos API con prototipos interactivos del Carrito ODS y
+                especificaciones para Jira MS-3923.
+              </p>
+              <div class="case-metrics-strip">
+                <div class="case-metric-item">
+                  <span class="case-metric-val">8</span>
+                  <span class="case-metric-lbl">Fases Validadas</span>
+                </div>
+                <div class="case-metric-item">
+                  <span class="case-metric-val">7</span>
+                  <span class="case-metric-lbl">Docs Confluence</span>
+                </div>
+                <div class="case-metric-item">
+                  <span class="case-metric-val">3</span>
+                  <span class="case-metric-lbl">Modos Despacho</span>
+                </div>
+                <div class="case-metric-item">
+                  <span class="case-metric-val">100%</span>
+                  <span class="case-metric-lbl">MS-3923 Jira</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 2: Progressive Leasing - React Flow Builder & Scan to Sign -->
           <div class="glass-card case-card" data-category="fintech ai" data-case-id="progleasing">
             <div class="case-media">
-              <span class="case-overlay-tag">Fintech EE.UU. • IA Workflows</span>
-              <img src="assets/images/03-react-flow-builder.png" alt="Progressive Leasing React Flow Builder" loading="lazy">
+              <span class="case-overlay-tag">Workflow Builder • Okta Security</span>
+              <img src="assets/images/03-react-flow-builder.png" alt="Progressive Leasing React Flow Builder"
+                loading="lazy">
             </div>
             <div class="case-content">
               <div class="case-client-row">
                 <span class="case-company">Progressive Leasing (Utah, EE.UU.)</span>
                 <span class="case-period">2024 - Presente</span>
               </div>
-              <h3 class="case-title">Orquestación de Crédito, Carrito ODS & Firma QR 'Scan to Sign'</h3>
+              <h3 class="case-title">React Flow Builder, Seguridad Okta & Firma QR 'Scan to Sign'</h3>
               <p class="case-desc">
-                Lideré el diseño de experiencia para Progressive Leasing (Utah, EE.UU.) en ProgCentral: diseñé el flujo de originación y captura de depósitos RLD, la resiliencia en el Carrito ODS (Order Delivery System) y la innovación de 'Scan to Sign' (firma de contratos mediante QR en tienda), acelerando la síntesis con Claude Cowork para reducir un 38% el tiempo de configuración y asegurar 100% de compliance.
+                Diseñé el constructor visual de nodos drag-and-drop con validación lógica en tiempo real para
+                ProgCentral y la innovación 'Scan to Sign' (firma de contratos mediante QR en retail). Optimicé flujos
+                de originación RLD y aseguré gobernanza estricta bajo estándares de seguridad Okta, reduciendo un 38% el
+                tiempo de configuración de reglas.
               </p>
               <div class="case-metrics-strip">
                 <div class="case-metric-item">
@@ -511,7 +651,9 @@
               </div>
               <h3 class="case-title">Democratización de Plataforma de Inversiones Digitales</h3>
               <p class="case-desc">
-                Eliminé el miedo a invertir traduciendo la jerga financiera densa en simuladores interactivos guiados por metas de vida reales, combinando microcopy empático testeado con IA para incrementar en 32% los nuevos inversionistas activos.
+                Eliminé el miedo a invertir traduciendo la jerga financiera densa en simuladores interactivos guiados
+                por metas de vida reales, combinando microcopy empático testeado con IA para incrementar en 32% los
+                nuevos inversionistas activos.
               </p>
               <div class="case-metrics-strip">
                 <div class="case-metric-item">
@@ -543,7 +685,9 @@
               </div>
               <h3 class="case-title">Optimización de Funnel de Compra y Escalamiento Regional</h3>
               <p class="case-desc">
-                Unifiqué la experiencia de checkout y selección de despacho para más de 15 millones de compradores mensuales en 3 países, reduciendo drásticamente la fricción en el carrito y generando un aumento del 1.8% en la tasa de conversión global (CRO).
+                Unifiqué la experiencia de checkout y selección de despacho para más de 15 millones de compradores
+                mensuales en 3 países, reduciendo drásticamente la fricción en el carrito y generando un aumento del
+                1.8% en la tasa de conversión global (CRO).
               </p>
               <div class="case-metrics-strip">
                 <div class="case-metric-item">
@@ -566,7 +710,8 @@
           <div class="glass-card case-card" data-category="fintech" data-case-id="everis">
             <div class="case-media">
               <span class="case-overlay-tag">Fintech & Telecom Móvil</span>
-              <img src="assets/images/05-published-workflow.png" alt="everis NTT DATA Santander y Telefonica" loading="lazy">
+              <img src="assets/images/05-published-workflow.png" alt="everis NTT DATA Santander y Telefonica"
+                loading="lazy">
             </div>
             <div class="case-content">
               <div class="case-client-row">
@@ -575,7 +720,9 @@
               </div>
               <h3 class="case-title">Ecosistemas Móviles Nativos y Apps de Campo B2B</h3>
               <p class="case-desc">
-                Diseñé interfaces táctiles resistentes para técnicos de terreno de Telefónica con soporte offline en Ionic 4 y flujos de enrolamiento veloz para la fintech Superdigital de Santander, reduciendo en 50% los tiempos de resolución en campo.
+                Diseñé interfaces táctiles resistentes para técnicos de terreno de Telefónica con soporte offline en
+                Ionic 4 y flujos de enrolamiento veloz para la fintech Superdigital de Santander, reduciendo en 50% los
+                tiempos de resolución en campo.
               </p>
               <div class="case-metrics-strip">
                 <div class="case-metric-item">
@@ -604,17 +751,19 @@
     <section class="section" id="cursos">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag" style="background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.3); color: #A5B4FC;">
+          <div class="section-tag"
+            style="background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.3); color: #A5B4FC;">
             Especialización Continua
           </div>
           <h2 class="section-title">Cursos de Inteligencia Artificial & Negocios</h2>
           <p class="section-subtitle">
-            Certificaciones y especializaciones que respaldan mi dominio técnico en modelos generativos y visión estratégica empresarial:
+            Certificaciones y especializaciones que respaldan mi dominio técnico en modelos generativos y visión
+            estratégica empresarial:
           </p>
         </div>
 
         <div class="cert-grid">
-          
+
           <!-- Cert 1: Claude 101 -->
           <div class="glass-card cert-card">
             <div>
@@ -625,7 +774,8 @@
               <h3 class="cert-title">Claude 101 & Advanced Prompting</h3>
               <div class="cert-issuer">Anthropic / Prompt Engineering Framework</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Especialización en cadenas de pensamiento, estructuración de contexto denso, Claude Cowork en flujos de diseño y desarrollo de agentes para síntesis cualitativa.
+                Especialización en cadenas de pensamiento, estructuración de contexto denso, Claude Cowork en flujos de
+                diseño y desarrollo de agentes para síntesis cualitativa.
               </p>
             </div>
             <div class="cert-skills">
@@ -645,7 +795,8 @@
               <h3 class="cert-title">Google Gemini & Multimodal UX Analysis</h3>
               <div class="cert-issuer">Ecosistema Gemini Enterprise</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Aplicación de modelos multimodales para análisis visual de heurísticas, extracción de patrones de diseño desde capturas y benchmarking competitivo a alta velocidad.
+                Aplicación de modelos multimodales para análisis visual de heurísticas, extracción de patrones de diseño
+                desde capturas y benchmarking competitivo a alta velocidad.
               </p>
             </div>
             <div class="cert-skills">
@@ -665,7 +816,8 @@
               <h3 class="cert-title">Cómo Administrar por Objetivos (MBO / OKRs)</h3>
               <div class="cert-issuer">LinkedIn Learning & Project Management</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Alineación de objetivos de experiencia con metas trimestrales y anuales de la empresa: indicadores cuantitativos, valor entregado y ROI del diseño.
+                Alineación de objetivos de experiencia con metas trimestrales y anuales de la empresa: indicadores
+                cuantitativos, valor entregado y ROI del diseño.
               </p>
             </div>
             <div class="cert-skills">
@@ -685,7 +837,8 @@
               <h3 class="cert-title">Fundamentos de Gestión de Proyectos: Requisitos</h3>
               <div class="cert-issuer">Metodologías Ágiles & Project Governance</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Levantamiento riguroso de requerimientos funcionales y técnicos, prevención de scope creep y articulación entre stakeholders de negocio y equipos de ingeniería.
+                Levantamiento riguroso de requerimientos funcionales y técnicos, prevención de scope creep y
+                articulación entre stakeholders de negocio y equipos de ingeniería.
               </p>
             </div>
             <div class="cert-skills">
@@ -705,7 +858,8 @@
               <h3 class="cert-title">Liderazgo y Trabajo en Equipo en Entornos Ágiles</h3>
               <div class="cert-issuer">Cross-Functional Leadership</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Facilitación de workshops de co-creación, design sprints, gestión de consenso con clientes y liderazgo de squads multidisciplinarios en entornos remotos y globales.
+                Facilitación de workshops de co-creación, design sprints, gestión de consenso con clientes y liderazgo
+                de squads multidisciplinarios en entornos remotos y globales.
               </p>
             </div>
             <div class="cert-skills">
@@ -725,7 +879,8 @@
               <h3 class="cert-title">Inglés de Negocios: Comunicación y Gestión de Crisis</h3>
               <div class="cert-issuer">Executive Business English</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
-                Comunicación fluida con stakeholders ejecutivos en Estados Unidos (Progressive Leasing / Utah), defensa de decisiones de diseño y resolución de incidencias críticas.
+                Comunicación fluida con stakeholders ejecutivos en Estados Unidos (Progressive Leasing / Utah), defensa
+                de decisiones de diseño y resolución de incidencias críticas.
               </p>
             </div>
             <div class="cert-skills">
@@ -742,7 +897,8 @@
           <h4 style="font-size: 1.1rem; margin-bottom: 20px; color: var(--text-secondary);">
             Herramientas que Domino en el Día a Día:
           </h4>
-          <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 900px; margin: 0 auto;">
+          <div
+            style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 900px; margin: 0 auto;">
             <span class="badge badge-claude">Claude 3.7 / 3.5 Sonnet</span>
             <span class="badge badge-gemini">Google Gemini 2.5</span>
             <span class="badge">Figma & FigJam</span>
@@ -771,12 +927,13 @@
           </div>
           <h2 class="section-title">Trayectoria Profesional</h2>
           <p class="section-subtitle">
-            Más de una década evolucionando desde la dirección de arte y estrategia de negocio hasta el liderazgo en UX e inteligencia artificial:
+            Más de una década evolucionando desde la dirección de arte y estrategia de negocio hasta el liderazgo en UX
+            e inteligencia artificial:
           </p>
         </div>
 
         <div class="timeline-container">
-          
+
           <!-- Ki Technologies / Progressive Leasing -->
           <div class="timeline-item">
             <div class="timeline-marker"></div>
@@ -789,7 +946,9 @@
                 <div class="timeline-date">Diciembre 2024 — Presente</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Liderazgo de diseño para la plataforma de financiamiento Lease-to-Own. Creación de la arquitectura de 'ProgCentral' y 'React Flow Builder' para gobernanza de aprobaciones. Aplicación de Claude Cowork para sintetizar pruebas de usabilidad y frameworks cuantitativos de evaluación A/B.
+                Liderazgo de diseño para la plataforma de financiamiento Lease-to-Own. Creación de la arquitectura de
+                'ProgCentral' y 'React Flow Builder' para gobernanza de aprobaciones. Aplicación de Claude Cowork para
+                sintetizar pruebas de usabilidad y frameworks cuantitativos de evaluación A/B.
               </p>
             </div>
           </div>
@@ -806,7 +965,9 @@
                 <div class="timeline-date">Marzo 2022 — Febrero 2024 (2 años)</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Colaboración en el desarrollo de productos de inversión y flujos customer-centric. Ejecución de actividades de Research cualitativo, Journey Maps, diagramas de flujo, Wireframing, Prototyping y experiencia End-to-End, logrando un aumento del 32% en nuevos inversionistas digitales.
+                Colaboración en el desarrollo de productos de inversión y flujos customer-centric. Ejecución de
+                actividades de Research cualitativo, Journey Maps, diagramas de flujo, Wireframing, Prototyping y
+                experiencia End-to-End, logrando un aumento del 32% en nuevos inversionistas digitales.
               </p>
             </div>
           </div>
@@ -823,7 +984,8 @@
                 <div class="timeline-date">Septiembre 2020 — Enero 2022 (1 año 5 meses)</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Optimización de la tasa de conversión en los flujos de checkout, selección de métodos de despacho y escalamiento del Design System transversal para los equipos de Chile, Perú y Colombia.
+                Optimización de la tasa de conversión en los flujos de checkout, selección de métodos de despacho y
+                escalamiento del Design System transversal para los equipos de Chile, Perú y Colombia.
               </p>
             </div>
           </div>
@@ -840,7 +1002,9 @@
                 <div class="timeline-date">Junio 2019 — Septiembre 2020 (1 año 4 meses)</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Diseño de pantallas nativas para la fintech Superdigital de Santander, flujos para comercios en Transbank y maquetación frontend en Ionic 4 para la aplicación móvil de soporte técnico en terreno de Telefónica S.A.
+                Diseño de pantallas nativas para la fintech Superdigital de Santander, flujos para comercios en
+                Transbank y maquetación frontend en Ionic 4 para la aplicación móvil de soporte técnico en terreno de
+                Telefónica S.A.
               </p>
             </div>
           </div>
@@ -857,7 +1021,8 @@
                 <div class="timeline-date">Julio 2018 — Junio 2019 (1 año)</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Benchmark competitivo, validación de datos, journey mapping, wireframing, pruebas de usabilidad y maquetación frontend en Ionic 4 bajo metodologías ágiles.
+                Benchmark competitivo, validación de datos, journey mapping, wireframing, pruebas de usabilidad y
+                maquetación frontend en Ionic 4 bajo metodologías ágiles.
               </p>
             </div>
           </div>
@@ -874,8 +1039,36 @@
                 <div class="timeline-date">Febrero 2016 — Julio 2018 (2 años 6 meses)</div>
               </div>
               <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px;">
-                Desarrollo de planes de negocio, consultoría estratégica para clientes en EE.UU., aumento de tráfico web, desarrollo de estrategias de venta e interfaces para optimización de ingresos publicitarios.
+                Desarrollo de planes de negocio, consultoría estratégica para clientes en EE.UU., aumento de tráfico
+                web, desarrollo de estrategias de venta e interfaces para optimización de ingresos publicitarios.
               </p>
+            </div>
+          </div>
+
+          <!-- CV Download Banner in Trayectoria -->
+          <div class="glass-card"
+            style="margin-top: 40px; padding: 26px 30px; border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+            <div style="max-width: 600px;">
+              <h4
+                style="font-size: 1.15rem; color: #FFFFFF; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                <span>📄</span> Descargar Currículum Vitae Oficial (PDF)
+              </h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                Accede al historial profesional completo con métricas de impacto en FinTech (Progressive Leasing
+                EE.UU.), Banca (Bci, Santander), CIAM (Falabella) y certificaciones en IA aplicada.
+              </p>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="assets/Alejandro_Le_Mare_CV_ES.pdf" target="_blank" class="btn btn-secondary btn-sm"
+                download="Alejandro_Le_Mare_CV_ES.pdf" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span>🇪🇸</span>
+                <span>CV Español (3 págs)</span>
+              </a>
+              <a href="assets/Alejandro_Le_Mare_Resume_EN.pdf" target="_blank" class="btn btn-primary btn-sm"
+                download="Alejandro_Le_Mare_Resume_EN.pdf" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span>🇺🇸</span>
+                <span>Resume English (2 pages)</span>
+              </a>
             </div>
           </div>
 
@@ -889,23 +1082,26 @@
     <section class="section" id="contacto">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34D399;">
+          <div class="section-tag"
+            style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34D399;">
             Conversemos
           </div>
           <h2 class="section-title">¿Listo para Impulsar tu Próximo Producto con UX e IA?</h2>
           <p class="section-subtitle">
-            Hablemos sobre cómo conectar las necesidades de tus usuarios con los objetivos de tu negocio mediante diseño de vanguardia y aceleración con IA.
+            Hablemos sobre cómo conectar las necesidades de tus usuarios con los objetivos de tu negocio mediante diseño
+            de vanguardia y aceleración con IA.
           </p>
         </div>
 
         <div class="contact-grid">
-          
+
           <!-- Contact Info Channels -->
           <div class="glass-card contact-info-card">
             <div>
               <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Canales Directos</h3>
               <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px;">
-                Respondo habitualmente en menos de 24 horas. Disponible para roles Senior / Lead UX y consultorías de producto estratégico.
+                Respondo habitualmente en menos de 24 horas. Disponible para roles Senior / Lead UX y consultorías de
+                producto estratégico.
               </p>
 
               <!-- Email -->
@@ -918,7 +1114,8 @@
               </a>
 
               <!-- WhatsApp / Phone -->
-              <a href="https://wa.me/56959191255" target="_blank" rel="noopener" class="contact-channel" id="contact-whatsapp-link">
+              <a href="https://wa.me/56959191255" target="_blank" rel="noopener" class="contact-channel"
+                id="contact-whatsapp-link">
                 <div class="channel-icon">💬</div>
                 <div class="channel-details">
                   <h4>WhatsApp & Teléfono</h4>
@@ -927,7 +1124,8 @@
               </a>
 
               <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/in/alejandrolemare/" target="_blank" rel="noopener" class="contact-channel" id="contact-linkedin-link">
+              <a href="https://www.linkedin.com/in/alejandrolemare/" target="_blank" rel="noopener"
+                class="contact-channel" id="contact-linkedin-link">
                 <div class="channel-icon">💼</div>
                 <div class="channel-details">
                   <h4>Perfil de LinkedIn</h4>
@@ -947,12 +1145,27 @@
 
             <!-- Resume Download Callout -->
             <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
-              <a href="assets/Alejandro_Lemare_Resume.pdf" target="_blank" class="btn btn-primary" style="width: 100%;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                Descargar CV Completo (PDF)
-              </a>
+              <h4
+                style="font-size: 0.96rem; color: var(--text-primary); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                <span>📄</span> Descargar Currículum Vitae Oficial (PDF)
+              </h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                Formato descargable optimizado con historial completo y certificaciones:
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <a href="assets/Alejandro_Le_Mare_CV_ES.pdf" target="_blank" class="btn btn-secondary btn-sm"
+                  style="display: flex; justify-content: center; align-items: center; gap: 6px; padding: 10px 12px; text-align: center;"
+                  download="Alejandro_Le_Mare_CV_ES.pdf">
+                  <span>🇪🇸</span>
+                  <span>CV Español</span>
+                </a>
+                <a href="assets/Alejandro_Le_Mare_Resume_EN.pdf" target="_blank" class="btn btn-primary btn-sm"
+                  style="display: flex; justify-content: center; align-items: center; gap: 6px; padding: 10px 12px; text-align: center;"
+                  download="Alejandro_Le_Mare_Resume_EN.pdf">
+                  <span>🇺🇸</span>
+                  <span>Resume English</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -966,7 +1179,8 @@
             <form id="contact-form">
               <div class="form-group">
                 <label for="form-name" class="form-label">Tu Nombre o Empresa *</label>
-                <input type="text" id="form-name" class="form-input" placeholder="Ej: Valentina Morales / FinTech SpA" required>
+                <input type="text" id="form-name" class="form-input" placeholder="Ej: Valentina Morales / FinTech SpA"
+                  required>
               </div>
 
               <div class="form-group">
@@ -986,13 +1200,15 @@
 
               <div class="form-group">
                 <label for="form-message" class="form-label">Mensaje / Breve Resumen *</label>
-                <textarea id="form-message" class="form-textarea" placeholder="¿En qué consiste el proyecto o vacante?" required></textarea>
+                <textarea id="form-message" class="form-textarea" placeholder="¿En qué consiste el proyecto o vacante?"
+                  required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary" style="width: 100%;">
                 <span>Enviar Mensaje a Alejandro</span>
                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                  </path>
                 </svg>
               </button>
 
@@ -1010,7 +1226,8 @@
        ========================================================================== -->
   <footer class="footer">
     <div class="container">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; gap: 10px;">
           <div class="brand-monogram" style="width: 32px; height: 32px; font-size: 0.9rem;">AL</div>
           <span style="font-weight: 700; color: var(--text-primary);">Alejandro Le Mare Mendoza</span>
@@ -1020,11 +1237,13 @@
           <a href="#metodologia" class="nav-link">Metodología</a>
           <a href="#casos" class="nav-link">Casos de Estudio</a>
           <a href="#cursos" class="nav-link">Cursos IA</a>
-          <a href="https://www.linkedin.com/in/alejandrolemare/" target="_blank" rel="noopener" class="nav-link" style="color: var(--color-primary-light);">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/alejandrolemare/" target="_blank" rel="noopener" class="nav-link"
+            style="color: var(--color-primary-light);">LinkedIn ↗</a>
         </div>
       </div>
       <p>
-        © 2026 Alejandro Le Mare Mendoza. Diseñado con rigor estratégico para maximizar valor a usuarios y negocios. Potenciado con Claude 3.7 & Gemini 2.5.
+        © 2026 Alejandro Le Mare Mendoza. Diseñado con rigor estratégico para maximizar valor a usuarios y negocios.
+        Potenciado con Claude 3.7 & Gemini 2.5.
       </p>
     </div>
   </footer>
@@ -1035,7 +1254,7 @@
   <div class="modal-overlay" id="case-study-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-container">
       <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar ventana modal">✕</button>
-      
+
       <div class="modal-body">
         <div style="margin-bottom: 20px;">
           <span id="modal-tag" class="badge badge-ai" style="margin-bottom: 12px;">Fintech</span>
@@ -1048,24 +1267,31 @@
         </div>
 
         <!-- Metrics Strip -->
-        <div id="modal-metrics-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px;"></div>
+        <div id="modal-metrics-container"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px;">
+        </div>
 
         <!-- Overview -->
         <div style="margin-bottom: 24px;">
-          <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary);">Visión General del Proyecto</h4>
+          <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary);">Visión General del Proyecto
+          </h4>
           <p id="modal-overview" style="color: var(--text-secondary); line-height: 1.7;"></p>
         </div>
 
         <!-- Challenge & Solution Grid -->
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;">
-          <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 20px;">
-            <h4 style="font-size: 1rem; color: #F87171; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+          <div
+            style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 20px;">
+            <h4
+              style="font-size: 1rem; color: #F87171; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
               ⚠️ El Desafío de Negocio
             </h4>
             <p id="modal-challenge" style="font-size: 0.9rem; color: #CBD5E1; line-height: 1.6;"></p>
           </div>
-          <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 20px;">
-            <h4 style="font-size: 1rem; color: #34D399; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+          <div
+            style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 20px;">
+            <h4
+              style="font-size: 1rem; color: #34D399; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
               💡 La Solución UX & Aporte de IA
             </h4>
             <p id="modal-solution" style="font-size: 0.9rem; color: #CBD5E1; line-height: 1.6;"></p>
@@ -1074,17 +1300,21 @@
 
         <!-- Specific Initiatives Breakdown (Jira Epics / Features) -->
         <div id="modal-initiatives-section" style="margin-bottom: 28px; display: none;">
-          <h4 style="font-size: 1.15rem; margin-bottom: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+          <h4
+            style="font-size: 1.15rem; margin-bottom: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
             <span>🚀</span> Módulos & Épicas Diseñadas en Producción
           </h4>
           <div id="modal-initiatives-grid" style="display: flex; flex-direction: column; gap: 12px;"></div>
         </div>
 
         <!-- Live Prototype Banner if available -->
-        <div id="modal-prototype-banner" style="margin-bottom: 24px; display: none; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--border-glow); padding: 18px 22px; border-radius: var(--radius-md); justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div id="modal-prototype-banner"
+          style="margin-bottom: 24px; display: none; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--border-glow); padding: 18px 22px; border-radius: var(--radius-md); justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div>
-            <h5 style="font-size: 1rem; color: #FFFFFF; margin-bottom: 3px;">Prototipo Interactivo Funcional Disponible</h5>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Explora el flujo de Carrito ODS y Estimador de Pagos desarrollado para ProgCentral.</p>
+            <h5 style="font-size: 1rem; color: #FFFFFF; margin-bottom: 3px;">Prototipo Interactivo Funcional Disponible
+            </h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Explora el flujo de Carrito ODS y
+              Estimador de Pagos desarrollado para ProgCentral.</p>
           </div>
           <a id="modal-prototype-link" href="#" target="_blank" class="btn btn-primary btn-sm">
             <span>Abrir Prototipo ODS ↗</span>
@@ -1093,7 +1323,8 @@
 
         <!-- Gallery / Screenshots -->
         <div>
-          <h4 style="font-size: 1.1rem; margin-bottom: 14px; color: var(--text-primary);">Capturas del Flujo y Entregables Visuales</h4>
+          <h4 style="font-size: 1.1rem; margin-bottom: 14px; color: var(--text-primary);">Capturas del Flujo y
+            Entregables Visuales</h4>
           <div id="modal-gallery-container"></div>
         </div>
 
@@ -1111,4 +1342,5 @@
   <script src="js/modal.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -3,8 +3,116 @@
    ========================================================================== */
 
 const caseStudiesData = {
+  ods_progleasing: {
+    title: "ODS Project Journey: Order Domain Service Discovery & Design",
+    company: "Progressive Leasing | Utah, EE.UU. (vía Ki Technologies)",
+    role: "Senior UX Designer & AI Strategist",
+    period: "2024 - 2026",
+    tag: "Fintech Enterprise & ODS • ProgCentral",
+    coverImage: "assets/images/ods.png",
+    prototypeUrl: "assets/prototipo-flujo-ods-progcentral.html",
+    gallery: [
+      { src: "assets/images/ods.png", caption: "ODS Cart Inicial: Captura de identificador GTIN-12, método de pago y términos del contrato" },
+      { src: "assets/images/ods2.png", caption: "ODS Ítems en Carrito: Validación de estado Leasable, cálculo dinámico de aprobación remanente y depósito" },
+      { src: "assets/images/ods3.png", caption: "Panel Lateral 'Add Additional Charges': Drawer contextual para recargos y servicios asociados" },
+      { src: "assets/images/ods4.png", caption: "Fulfillment & Resumen Actualizado: Asignación de garantía ($300.00) y recálculo automático del total" }
+    ],
+    overview: "El proyecto Order Domain Service (ODS) de Progressive Leasing transformó especificaciones abstractas en una arquitectura de experiencia de usuario lista para producción. Lideré el descubrimiento técnico, el mapeo integral del ciclo de vida de pedidos, el diseño del árbol de decisiones de despacho y la especificación de interacción para el formulario de entrega en ProgCentral (Jira MS-3923), alineando a los equipos de ProgCentral, MyStore BFF, Enterprise Architecture (EA) e Ingeniería.",
+    challenge: "El briefing inicial de ODS no proporcionaba referencias visuales ni ejemplos de implementación previos. El equipo de diseño debía cerrar la brecha entre documentación técnica densa en Confluence y especificaciones de diseño ejecutables en retail, coordinando múltiples áreas técnicas y garantizando compatibilidad con los contratos API reales en Utah.",
+    solution: "Ejecuté un viaje estructurado de 8 fases: desde la inmersión técnica con Mauricio Pacheco y la síntesis acelerada de requerimientos asistida por IA (Claude), hasta el mapeo del Happy Path (Draft → Confirmed → Fulfilled), prototipado interactivo del carrito ODS, matriz de opciones de entrega (SHIP, DIRECT, PICKUP) y la especificación UX del formulario MS-3923.",
+    metrics: [
+      { val: "8", label: "Fases de Proyecto Validadas" },
+      { val: "7", label: "Documentos Confluence Unificados" },
+      { val: "3", label: "Modos de Despacho Diseñados" },
+      { val: "100%", label: "Validación Jira MS-3923 & MS-3776" }
+    ],
+    initiatives: [
+      {
+        icon: "1️⃣",
+        title: "Fase 1: Revisión Inicial de Documentación",
+        subtitle: "Comprendiendo los Fundamentos • Plain English Briefing",
+        badge: "✓ Verified",
+        desc: "Análisis exhaustivo del documento 'ODS + ProgCentral: Plain English Briefing'. Detección del desafío crítico: ausencia total de referencias visuales o ejemplos previos de implementación, identificando la necesidad urgente de una inmersión técnica y alineación inter-equipos.",
+        deliverable: "Mapeo de requerimientos base y necesidad de alineación técnica profunda con Enterprise Architecture.",
+        reference: "Confluence: ODS + ProgCentral: Plain English Briefing (Friday Prep)"
+      },
+      {
+        icon: "2️⃣",
+        title: "Fase 2: Technical Deep Dive & Contratos API",
+        subtitle: "Inmersión Técnica con Mauricio Pacheco • Contexto Exhaustivo",
+        badge: "✓ Verified",
+        desc: "Revisión técnica de la arquitectura de eventos de dominio, ciclo de vida de órdenes, transiciones de estado de entrega y contratos API. Definición del modelo canónico de datos (Phase 1: Canonical Order & Item Model JSON schema) y confirmación de endpoints para creación de despachos.",
+        deliverable: "Matriz de contratos API, eventos de dominio y modelo canónico de datos para Phase 1.",
+        reference: "Confluence: Order Domain Service Product Overview, ODS Technical Design & Canonical Order Model"
+      },
+      {
+        icon: "3️⃣",
+        title: "Fase 3: Síntesis & Análisis Acelerado con IA",
+        subtitle: "Consolidación de Requerimientos Complejos con Claude",
+        badge: "⚡ AI Powered",
+        desc: "Aplicación de prompts estructurados en Claude (framework de cowork) para consolidar requerimientos técnicos complejos, identificando puntos de integración críticos, límites de alcance de Phase 1 y responsabilidades de escritura en el BFF de MyStore.",
+        deliverable: "Documento de Consolidación de Requerimientos ODS & Arquitectura de Integración Compartida.",
+        reference: "Síntesis técnica generativa con Claude Cowork Framework"
+      },
+      {
+        icon: "4️⃣",
+        title: "Fase 4: Mapeo del Happy Path (Full Lifecycle)",
+        subtitle: "Definición del Flujo Ideal de Usuario y Transición de Estados",
+        badge: "✓ Verified",
+        desc: "Diagramación paso a paso de las interacciones del usuario, respuestas del sistema y transiciones de estado a través de todo el ciclo de vida: DRAFT (creación) → CONFIRMED → PARTIALLY_FULFILLED → FULFILLED, estableciendo criterios de éxito en cada etapa.",
+        deliverable: "Happy Path - Mapa de Viaje Completo del Ciclo de Vida de Órdenes ODS.",
+        reference: "Matriz de verificación de estados y transiciones de entrega"
+      },
+      {
+        icon: "5️⃣",
+        title: "Fase 5: Prototipo Interactivo del Carrito ODS",
+        subtitle: "Herramienta de Validación Interactiva en Vivo",
+        badge: "🎯 Prototipo Funcional",
+        desc: "Construcción de un prototipo interactivo en HTML/JS del Carrito ODS con catálogo de productos, gestión de ítems, configuración de pedidos y simulación de generación de payloads API en vivo para validar contratos y flujos antes del desarrollo en código.",
+        deliverable: "Componente Funcional ODS Cart Experience (Prototipo Interactivo HTML).",
+        reference: "Prototipo interactivo disponible en vivo en este portafolio"
+      },
+      {
+        icon: "6️⃣",
+        title: "Fase 6: Análisis de Opciones de Despacho & Matriz Condicional",
+        subtitle: "Estrategia de Fulfillment y Requerimientos de Campos Dinámicos",
+        badge: "✓ Verified",
+        desc: "Re-análisis del diseño técnico para entrega y envíos: mapeo de 3 modalidades — SHIP (Transportista + Tracking), DIRECT (Fecha de entrega estimada) y PICKUP (Fecha de retiro en tienda). Confirmación del endpoint 'POST /v1/orders/{orderId}/deliveries' con soporte de despacho masivo (bulk) mediante array de itemRefs.",
+        deliverable: "Árbol de Decisión de Opciones de Despacho & Matriz de Requerimientos de Campos Condicionales.",
+        reference: "Especificación técnica API POST /v1/orders/{orderId}/deliveries para múltiples artículos"
+      },
+      {
+        icon: "7️⃣",
+        title: "Fase 7: UX Interaction Design del Formulario de Entrega",
+        subtitle: "Jira MS-3923: UI | CONFIRMED State — Delivery Detail Entry Form",
+        badge: "✓ Jira Validated",
+        desc: "Diseño detallado de interacción para el formulario de ingreso de datos de despacho en estado CONFIRMED: campos condicionales por tipo de envío, acciones de entrega individual y masiva (bulk), control de errores y actualización del pedido post-envío. Vinculado a la Épica MS-3776.",
+        deliverable: "Especificación UX Completa del Formulario: Patrones de Interacción, Manejo de Errores e Integración API.",
+        reference: "Jira ProgCentral: Ticket MS-3923 (Prioridad Alta) & Épica MS-3776 (ODS Integration)"
+      },
+      {
+        icon: "8️⃣",
+        title: "Fase 8: Wireframes Finales y Sistema de Diseño",
+        subtitle: "Especificaciones Listas para Implementación en Producción",
+        badge: "✓ Production Ready",
+        desc: "Integración de todas las especificaciones técnicas y hallazgos de interacción en wireframes y prototipos de alta fidelidad, alineados con el sistema de diseño de Progressive Leasing, estándares de accesibilidad, diseño responsivo y guías completas para desarrollo en Angular/React.",
+        deliverable: "Sistema de Diseño Listo para Producción, Biblioteca de Componentes y Guías Técnicas de Implementación.",
+        reference: "Entregables finales aprobados para equipos de frontend y backend"
+      }
+    ],
+    skills: [
+      "Order Domain Service (ODS)",
+      "Jira MS-3923 & MS-3776",
+      "Claude AI Requirements Synthesis",
+      "API Contract Validation",
+      "Interactive HTML Prototyping",
+      "Delivery Decision Trees",
+      "ProgCentral & MyStore BFF",
+      "FinTech USA Enterprise"
+    ]
+  },
   progleasing: {
-    title: "Orquestación de Crédito, Carrito ODS & Firma QR 'Scan to Sign'",
+    title: "React Flow Builder, Seguridad Okta & Firma QR 'Scan to Sign'",
     company: "Progressive Leasing | Utah, EE.UU. (vía Ki Technologies)",
     role: "Senior UX Designer",
     period: "Diciembre 2024 - Presente",
@@ -17,9 +125,9 @@ const caseStudiesData = {
       { src: "assets/images/01-workflow-definitions.png", caption: "Definiciones de Workflows: Catálogo y gobernanza de flujos de aprobación" },
       { src: "assets/images/10-review-request-detail.png", caption: "Detalle de revisión: Formulario con aprobación en 1-click y trazabilidad de rechazos" }
     ],
-    overview: "Progressive Leasing es el líder en soluciones de financiamiento Lease-to-Own en el retail de Estados Unidos. Como Senior UX Designer, diseñé flujos críticos para el portal 'ProgCentral', abordando la originación de crédito, resiliencia del carrito ODS (Order Delivery System), módulos de devolución y la innovación de firma sin contacto 'Scan to Sign'.",
-    challenge: "El personal de retail y operaciones en EE.UU. enfrentaba sistemas fragmentados: bloqueos por discrepancias entre órdenes de compra y contratos de leasing, demoras en caja para la firma de acuerdos y falta de visibilidad en estados de pago (RLD) y entornos de ejecución.",
-    solution: "Diseñé experiencias modulares de alta tolerancia a fallos: un estimador de pagos en Home, el flujo de captura de RLD, un panel de resolución de discrepancias en carrito ODS, y la arquitectura de 'Scan to Sign' (firma vía QR). Aceleré la síntesis de pruebas con Claude Cowork para validar decisiones con stakeholders en Utah.",
+    overview: "Progressive Leasing es el líder en soluciones de financiamiento Lease-to-Own en el retail de Estados Unidos. Lideré el diseño integral de la herramienta 'React Flow Builder' y módulos clave de gobernanza en ProgCentral, transformando configuraciones manuales en un orquestador visual intuitivo y modelando la innovación sin contacto 'Scan to Sign'.",
+    challenge: "Los equipos de operaciones y riesgo en EE.UU. dependían de configuraciones manuales en base de datos para modificar reglas de aprobación entre roles (RM, CCL, Account Managers), generando cuellos de botella de hasta 3 semanas y fricción para la firma en hardware compartido en tiendas.",
+    solution: "Diseñé un constructor visual de nodos drag-and-drop con validación lógica en tiempo real, el modal interactivo de firma mediante código QR 'Scan to Sign', y gobernanza estricta bajo estándares de seguridad Okta, acelerando la síntesis de usabilidad con Claude Cowork.",
     metrics: [
       { val: "-38%", label: "Tiempo de configuración de flujos" },
       { val: "94%", label: "Tasa de éxito en tareas de revisión" },
@@ -34,12 +142,7 @@ const caseStudiesData = {
       {
         icon: "💳",
         title: "Flujos de Pago y Originación RLD (MS-3625, MS-3392, MS-3906)",
-        desc: "Diseño del flujo de originación para capturar el método de pago y el depósito recurrente de arrendamiento (RLD). Optimización del 'Payment Estimator' en la pantalla principal y modernización de componentes obsoletos en el carrito ODS."
-      },
-      {
-        icon: "🛒",
-        title: "Carrito ODS & Manejo de Estados Críticos (MS-3812 a MS-3816)",
-        desc: "Mapeo exhaustivo de edge cases en punto de venta: estados de carga previos, panel de alerta cuando el contrato de leasing y la orden de ODS no coinciden, captura guiada de identificadores UPC/GTIN y control de sesión del operador."
+        desc: "Diseño del flujo de originación para capturar el método de pago y el depósito recurrente de arrendamiento (RLD). Optimización del 'Payment Estimator' en la pantalla principal y modernización de componentes."
       },
       {
         icon: "🔄",
@@ -52,7 +155,7 @@ const caseStudiesData = {
         desc: "Diseño de indicadores visuales de entorno (Stage vs Prod) en ProgCentral, ofuscación de valores sensibles/secretos, integración de políticas de contraseñas de Okta y documentación formal del proceso de diseño UX."
       }
     ],
-    skills: ["Scan to Sign QR", "Order Delivery System (ODS)", "Payment Estimator", "RLD Originación", "React Flow UI", "Claude Prompt Framework", "Okta Security UX", "FinTech USA"]
+    skills: ["React Flow UI", "Scan to Sign QR", "Payment Estimator", "RLD Originación", "Claude Prompt Framework", "Okta Security UX", "FinTech USA"]
   },
   bancobci: {
     title: "Democratización de Plataforma de Inversiones Digitales",
@@ -158,9 +261,23 @@ function initModal() {
           card.style.alignItems = "flex-start";
           card.innerHTML = `
             <span style="font-size: 1.4rem; line-height: 1; flex-shrink: 0; padding-top: 2px;">${item.icon}</span>
-            <div>
-              <h5 style="font-size: 0.98rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">${item.title}</h5>
+            <div style="flex-grow: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+                <h5 style="font-size: 1rem; font-weight: 700; color: #FFFFFF; margin: 0;">${item.title}</h5>
+                ${item.badge ? `<span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #34D399; font-weight: 600;">${item.badge}</span>` : ''}
+              </div>
+              ${item.subtitle ? `<div style="font-size: 0.82rem; color: var(--color-primary-light); margin-bottom: 6px; font-weight: 500;">${item.subtitle}</div>` : ''}
               <p style="font-size: 0.88rem; color: #CBD5E1; margin: 0; line-height: 1.55;">${item.desc}</p>
+              ${item.deliverable ? `
+                <div style="margin-top: 10px; padding: 8px 12px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10B981; border-radius: 4px; font-size: 0.82rem; color: #A7F3D0;">
+                  <strong>🎯 Entregable:</strong> ${item.deliverable}
+                </div>
+              ` : ''}
+              ${item.reference ? `
+                <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-muted);">
+                  <span style="color: #818CF8; font-weight: 600;">📌 Referencia Oficial:</span> ${item.reference}
+                </div>
+              ` : ''}
             </div>
           `;
           initGrid.appendChild(card);

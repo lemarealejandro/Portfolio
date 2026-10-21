@@ -733,6 +733,119 @@
   resize: vertical;
 }
 
+/* --------------------------------------------------------------------------
+   CV Download Dropdown (ES & EN)
+   -------------------------------------------------------------------------- */
+.cv-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cv-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown-chevron {
+  transition: transform var(--transition-fast);
+}
+
+.cv-dropdown-wrapper.open .dropdown-chevron,
+.cv-dropdown-wrapper:hover .dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.cv-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: var(--bg-surface-elevated);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-glow);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--transition-fast);
+  z-index: 200;
+}
+
+.cv-dropdown-wrapper.open .cv-dropdown-menu,
+.cv-dropdown-wrapper:hover .cv-dropdown-menu,
+.cv-dropdown-wrapper:focus-within .cv-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cv-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  background: transparent;
+}
+
+.cv-dropdown-item:hover {
+  background: var(--bg-glass-active);
+  color: #FFFFFF;
+}
+
+.cv-item-flag {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cv-item-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.cv-item-title {
+  font-family: var(--font-brand);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.cv-item-meta {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.cv-item-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.cv-dropdown-item:hover .cv-item-arrow {
+  color: var(--color-primary-light);
+  transform: translateY(2px);
+}
+
+.cv-dropdown-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 6px 8px;
+}
+
 .footer {
   padding: 50px 0 30px;
   border-top: 1px solid var(--border-subtle);
