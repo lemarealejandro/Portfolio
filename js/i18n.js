@@ -514,7 +514,7 @@ const translations = {
   const STORAGE_KEY = "portfolio_lang";
 
   function getCurrentLang() {
-    return localStorage.getItem(STORAGE_KEY) || "es";
+    return localStorage.getItem(STORAGE_KEY) || "en";
   }
 
   function setLang(lang) {
