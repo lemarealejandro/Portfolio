@@ -807,6 +807,11 @@ const translations = {
     setText("#modal-title", "modal.overview.h4"); // placeholder (modal.js fills dynamically)
     const modalCloseBtn = document.getElementById("modal-close-btn");
     if (modalCloseBtn) modalCloseBtn.setAttribute("aria-label", t("modal.aria.close", lang));
+
+    /* ── AI SIMULATOR — reload terminal in current language ── */
+    if (typeof window.reloadAiSimulator === "function") {
+      window.reloadAiSimulator();
+    }
   }
 
   function updateLangButton(lang) {
